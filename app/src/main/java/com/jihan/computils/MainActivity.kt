@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.jihan.computils.ui.demo.AdvancedLifecycleExample
+import com.jihan.computils.ui.demo.LifecycleExample
 import com.jihan.computils.ui.demo.MultiStepLoaderDemo
 
 import com.jihan.computils.ui.theme.AppTheme
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                CenterBox {
-                   MultiStepLoaderDemo()
+                  AdvancedLifecycleExample()
                }
             }
         }

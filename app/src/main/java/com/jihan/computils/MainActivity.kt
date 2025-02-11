@@ -14,16 +14,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import com.jihan.computils.ui.demo.MultiStepLoaderDemo
 
-import com.jihan.composeutils.gap
-
-import com.jihan.computils.ui.demo.RollerEffectTextDemo
-import com.jihan.computils.ui.demo.ShakeExample
-import com.jihan.computils.ui.demo.SimpleBottomNavDemo
-import com.jihan.computils.ui.demo.SimpleBottomNavWithDotDemo
-import com.jihan.computils.ui.demo.SimpleBottomNavWithLineDemo
-import com.jihan.computils.ui.demo.TypewriterTextDemo
 import com.jihan.computils.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,9 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                CenterBox {
-
-                   ShakeExample()
-
+                   MultiStepLoaderDemo()
                }
             }
         }

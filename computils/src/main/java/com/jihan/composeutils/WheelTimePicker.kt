@@ -494,15 +494,7 @@ internal fun WheelPicker(
     }
 }
 
-private fun Modifier.noRippleEffect(
-    onClick: () -> Unit
-) = composed {
-    this.clickable(
-        interactionSource = remember { MutableInteractionSource() },
-        indication = null,
-        onClick = onClick
-    )
-}
+
 
 
 @RequiresApi(Build.VERSION_CODES.O)

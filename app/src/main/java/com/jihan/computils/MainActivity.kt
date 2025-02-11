@@ -17,6 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.jihan.composeutils.gap
 import com.jihan.composeutils.text
+import com.jihan.computils.ui.demo.CheckboxWithLabelDemo
+import com.jihan.computils.ui.demo.ContactListDemo
+import com.jihan.computils.ui.demo.GroupedCheckboxDemo
+import com.jihan.computils.ui.demo.IconCheckBoxDemo
+import com.jihan.computils.ui.demo.OtpViewDemo
+import com.jihan.computils.ui.demo.RollerEffectTextDemo
 import com.jihan.computils.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,16 +34,7 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                CenterBox {
 
-                   "hello world".text.upperCase().size(41)
-                       .modifier(Modifier).maxLines(2).maxWords(8).color(Color.Red).make()
-                   gap(30)
-                   "THIS IS ANOTHER TEXT".text.titleCase().make()
-                   Row {
-                       "This is a text".text.size(20).color(Color.Blue).make()
-                          gap(50)
-                          "This is a text".text.size(20).color(Color.Blue).make()
-                   }
-
+            ContactListDemo()
 
                }
             }

@@ -6,18 +6,28 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.jihan.computils.ui.demo.AdvancedLifecycleExample
-import com.jihan.computils.ui.demo.LifecycleExample
-import com.jihan.computils.ui.demo.MultiStepLoaderDemo
-
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.jihan.composeutils.ExposedDropdownMenu
+import com.jihan.composeutils.coloredShadow
+import com.jihan.composeutils.gap
+import com.jihan.composeutils.text
+import com.jihan.computils.ui.demo.ColoredShadowDemo
+import com.jihan.computils.ui.demo.CustomSnackBarDemo
 import com.jihan.computils.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,25 +37,32 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-               CenterBox {
-                  AdvancedLifecycleExample()
-               }
+                ComposeUtils()
             }
         }
     }
 }
 
-
 @Composable
-fun CenterBox(
-    modifier: Modifier = Modifier.fillMaxSize(), content: @Composable ColumnScope.() -> Unit
-) {
-    Column(
-        modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        content()
+fun ComposeUtils() {
+
+    Scaffold {
+
+
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(it)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+
+
+
+        }
     }
 }
+
+
 

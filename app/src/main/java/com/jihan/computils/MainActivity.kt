@@ -25,7 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.jihan.composeutils.ExposedDropdownMenu
 import com.jihan.composeutils.coloredShadow
 import com.jihan.composeutils.Gap
+import com.jihan.composeutils.capitalized
+import com.jihan.composeutils.firstLetterUpperCase
+import com.jihan.composeutils.reverse
 import com.jihan.composeutils.text
+import com.jihan.composeutils.toEncodedBase64
+import com.jihan.composeutils.upperCamelCase
+import com.jihan.composeutils.validateEmail
 import com.jihan.computils.ui.demo.ColoredShadowDemo
 import com.jihan.computils.ui.demo.CustomSnackBarDemo
 import com.jihan.computils.ui.theme.AppTheme
@@ -43,6 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ComposeUtils() {
 
@@ -57,8 +64,7 @@ fun ComposeUtils() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-
-
+            "Hello World".text.make()
 
         }
     }

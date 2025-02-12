@@ -29,6 +29,4 @@ jobs:
         run: ./gradlew assemble
 
       - name: Publish to JitPack
-        run: |
-          git tag -a ${{ github.ref_name }} -m "Release ${{ github.ref_name }}"
-          git push origin --tags
+        run: git push origin --tags

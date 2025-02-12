@@ -42,13 +42,13 @@ fun CenterBox(
 
 
 @Composable
-fun ColumnScope.gap(size: Int) {
+fun ColumnScope.Gap(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
 
 }
 
 @Composable
-fun RowScope.gap(size: Int) {
+fun RowScope.Gap(size: Int) {
     Spacer(modifier = Modifier.width(size.dp))
 }
 

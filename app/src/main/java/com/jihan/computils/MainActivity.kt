@@ -25,9 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                ComposeUtils()
-                ExpandableCard {  }
-                WheelTimePicker()
+                ExpandableCardDemo()
             }
         }
     }

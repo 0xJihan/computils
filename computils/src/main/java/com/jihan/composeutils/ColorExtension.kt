@@ -1,6 +1,5 @@
 package com.jihan.composeutils
 
-
 import androidx.compose.ui.graphics.Color
 
 object Cx {
@@ -123,4 +122,148 @@ object Cx {
     val indigo700 = Color(0xFF4338CA)
     val indigo800 = Color(0xFF3730A3)
     val indigo900 = Color(0xFF312E81)
+
+    // Teal
+    val teal50 = Color(0xFFF0FDFA)
+    val teal100 = Color(0xFFCCFBF1)
+    val teal200 = Color(0xFF99F6E4)
+    val teal300 = Color(0xFF5EEAD4)
+    val teal400 = Color(0xFF2DD4BF)
+    val teal500 = Color(0xFF14B8A6)
+    val teal600 = Color(0xFF0D9488)
+    val teal700 = Color(0xFF0F766E)
+    val teal800 = Color(0xFF115E59)
+    val teal900 = Color(0xFF134E4A)
+
+    // Lime
+    val lime50 = Color(0xFFF7FEE7)
+    val lime100 = Color(0xFFECFCCB)
+    val lime200 = Color(0xFFD9F99D)
+    val lime300 = Color(0xFFBEF264)
+    val lime400 = Color(0xFFA3E635)
+    val lime500 = Color(0xFF84CC16)
+    val lime600 = Color(0xFF65A30D)
+    val lime700 = Color(0xFF4D7C0F)
+    val lime800 = Color(0xFF3F6212)
+    val lime900 = Color(0xFF365314)
+
+    // Amber
+    val amber50 = Color(0xFFFFFBEB)
+    val amber100 = Color(0xFFFEF3C7)
+    val amber200 = Color(0xFFFDE68A)
+    val amber300 = Color(0xFFFCD34D)
+    val amber400 = Color(0xFFFBBF24)
+    val amber500 = Color(0xFFF59E0B)
+    val amber600 = Color(0xFFD97706)
+    val amber700 = Color(0xFFB45309)
+    val amber800 = Color(0xFF92400E)
+    val amber900 = Color(0xFF78350F)
+
+    // Emerald
+    val emerald50 = Color(0xFFECFDF5)
+    val emerald100 = Color(0xFFD1FAE5)
+    val emerald200 = Color(0xFFA7F3D0)
+    val emerald300 = Color(0xFF6EE7B7)
+    val emerald400 = Color(0xFF34D399)
+    val emerald500 = Color(0xFF10B981)
+    val emerald600 = Color(0xFF059669)
+    val emerald700 = Color(0xFF047857)
+    val emerald800 = Color(0xFF065F46)
+    val emerald900 = Color(0xFF064E3B)
+
+    // Sky
+    val sky50 = Color(0xFFF0F9FF)
+    val sky100 = Color(0xFFE0F2FE)
+    val sky200 = Color(0xFFBAE6FD)
+    val sky300 = Color(0xFF7DD3FC)
+    val sky400 = Color(0xFF38BDF8)
+    val sky500 = Color(0xFF0EA5E9)
+    val sky600 = Color(0xFF0284C7)
+    val sky700 = Color(0xFF0369A1)
+    val sky800 = Color(0xFF075985)
+    val sky900 = Color(0xFF0C4A6E)
+
+    // Violet
+    val violet50 = Color(0xFFF5F3FF)
+    val violet100 = Color(0xFFEDE9FE)
+    val violet200 = Color(0xFFDDD6FE)
+    val violet300 = Color(0xFFC4B5FD)
+    val violet400 = Color(0xFFA78BFA)
+    val violet500 = Color(0xFF8B5CF6)
+    val violet600 = Color(0xFF7C3AED)
+    val violet700 = Color(0xFF6D28D9)
+    val violet800 = Color(0xFF5B21B6)
+    val violet900 = Color(0xFF4C1D95)
+
+    // Fuchsia
+    val fuchsia50 = Color(0xFFFDF4FF)
+    val fuchsia100 = Color(0xFFFAE8FF)
+    val fuchsia200 = Color(0xFFF5D0FE)
+    val fuchsia300 = Color(0xFFF0ABFC)
+    val fuchsia400 = Color(0xFFE879F9)
+    val fuchsia500 = Color(0xFFD946EF)
+    val fuchsia600 = Color(0xFFC026D3)
+    val fuchsia700 = Color(0xFFA21CAF)
+    val fuchsia800 = Color(0xFF86198F)
+    val fuchsia900 = Color(0xFF701A75)
+
+    // Rose
+    val rose50 = Color(0xFFFFF1F2)
+    val rose100 = Color(0xFFFFE4E6)
+    val rose200 = Color(0xFFFECDD3)
+    val rose300 = Color(0xFFFDA4AF)
+    val rose400 = Color(0xFFFB7185)
+    val rose500 = Color(0xFFF43F5E)
+    val rose600 = Color(0xFFE11D48)
+    val rose700 = Color(0xFFBE123C)
+    val rose800 = Color(0xFF9F1239)
+    val rose900 = Color(0xFF881337)
+
+    // Stone
+    val stone50 = Color(0xFFFAFAF9)
+    val stone100 = Color(0xFFF5F5F4)
+    val stone200 = Color(0xFFE7E5E4)
+    val stone300 = Color(0xFFD6D3D1)
+    val stone400 = Color(0xFFA8A29E)
+    val stone500 = Color(0xFF78716C)
+    val stone600 = Color(0xFF57534E)
+    val stone700 = Color(0xFF44403C)
+    val stone800 = Color(0xFF292524)
+    val stone900 = Color(0xFF1C1917)
+
+    // Neutral
+    val neutral50 = Color(0xFFFAFAFA)
+    val neutral100 = Color(0xFFF5F5F5)
+    val neutral200 = Color(0xFFE5E5E5)
+    val neutral300 = Color(0xFFD4D4D4)
+    val neutral400 = Color(0xFFA3A3A3)
+    val neutral500 = Color(0xFF737373)
+    val neutral600 = Color(0xFF525252)
+    val neutral700 = Color(0xFF404040)
+    val neutral800 = Color(0xFF262626)
+    val neutral900 = Color(0xFF171717)
+
+    // Zinc
+    val zinc50 = Color(0xFFFAFAFA)
+    val zinc100 = Color(0xFFF4F4F5)
+    val zinc200 = Color(0xFFE4E4E7)
+    val zinc300 = Color(0xFFD4D4D8)
+    val zinc400 = Color(0xFFA1A1AA)
+    val zinc500 = Color(0xFF71717A)
+    val zinc600 = Color(0xFF52525B)
+    val zinc700 = Color(0xFF3F3F46)
+    val zinc800 = Color(0xFF27272A)
+    val zinc900 = Color(0xFF18181B)
+
+    // Slate
+    val slate50 = Color(0xFFF8FAFC)
+    val slate100 = Color(0xFFF1F5F9)
+    val slate200 = Color(0xFFE2E8F0)
+    val slate300 = Color(0xFFCBD5E1)
+    val slate400 = Color(0xFF94A3B8)
+    val slate500 = Color(0xFF64748B)
+    val slate600 = Color(0xFF475569)
+    val slate700 = Color(0xFF334155)
+    val slate800 = Color(0xFF1E293B)
+    val slate900 = Color(0xFF0F172A)
 }

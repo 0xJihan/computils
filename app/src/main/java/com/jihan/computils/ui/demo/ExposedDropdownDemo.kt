@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jihan.composeutils.ExposedDropdownMenu
-import com.jihan.composeutils.gap
+import com.jihan.composeutils.Gap
 import com.jihan.composeutils.text
 
 @Composable
@@ -28,7 +28,7 @@ fun ExposedDropdownDemo(modifier: Modifier = Modifier) {
         var text by remember { mutableStateOf("") }
 
         text.text.make()
-        gap(30)
+        Gap(30)
         ExposedDropdownMenu(list) {string,int ->
             text = "$string\nIndex:$int"
         }

@@ -2,10 +2,8 @@ name: Publish Library
 
 on:
   push:
-    branches:
-      - dev
-  release:
-    types: [created]
+    tags:
+      - 'v*'  # This will trigger the pipeline for tags starting with "v", e.g., v1.0.0, v2.1.0, etc.
 
 jobs:
   build:
@@ -30,4 +28,3 @@ jobs:
         run: ./gradlew publish
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-

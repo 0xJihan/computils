@@ -13,7 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 
 @Composable
-fun LifecycleManager(
+fun CxLifecycleManager(
     onStart: () -> Unit = {},
     onResume: () -> Unit = {},
     onPause: () -> Unit = {},

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun IconCheckBox(
+fun CxIconCheckBox(
     modifier: Modifier = Modifier,
     checkedIcon: Int ,
     unCheckedIcon: Int ,
@@ -48,7 +48,7 @@ fun IconCheckBox(
 
 
 @Composable
-fun IconCheckBoxWithLabel(
+fun CxIconCheckBoxWithLabel(
     modifier: Modifier = Modifier,
     text: String = "Checkbox Label",
     checkedIcon: Int ,
@@ -95,7 +95,7 @@ fun IconCheckBoxWithLabel(
 }
 
 @Composable
-fun IconCheckBoxGrouped(
+fun CxIconCheckBoxGrouped(
     modifier: Modifier = Modifier,
     checkedIcon: Int,
     unCheckedIcon: Int ,

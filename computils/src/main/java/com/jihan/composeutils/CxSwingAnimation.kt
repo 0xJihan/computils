@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SwingAnimation(
+fun CxSwingAnimation(
     modifier: Modifier = Modifier,
     boardImage: ImageVector,
     textContent: @Composable () -> Unit,

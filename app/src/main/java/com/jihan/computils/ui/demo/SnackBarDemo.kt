@@ -22,22 +22,21 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.SnackBar
-import com.jihan.composeutils.CustomSnackBarPosition
-import com.jihan.composeutils.CustomSnackBarState
-import com.jihan.composeutils.R
+import com.jihan.composeutils.CxSnackBar
+import com.jihan.composeutils.CxSnackBarPosition
+import com.jihan.composeutils.CxSnackBarState
 import com.jihan.lucide_icons.lucide
 
 @Composable
 fun CustomSnackBarDemo() {
     val topSnackBarState = remember{
-        CustomSnackBarState()
+        CxSnackBarState()
     }
     val bottomSnackBarState = remember{
-        CustomSnackBarState()
+        CxSnackBarState()
     }
     val floatingSnackBarState = remember{
-        CustomSnackBarState()
+        CxSnackBarState()
     }
 
     Surface(
@@ -78,13 +77,13 @@ fun CustomSnackBarDemo() {
             }
         }
 
-        SnackBar(
+        CxSnackBar(
             state = topSnackBarState,
             duration = 3000L,
             backgroundColor = Color(0xFF18B661),
             iconColor = Color(0xFFEEEEEE),
             iconSize = 28.dp,
-            position = CustomSnackBarPosition.Top,
+            position = CxSnackBarPosition.Top,
             verticalPadding = 16.dp,
             horizontalPadding = 12.dp,
             iconRes = com.jihan.lucide_icons.R.drawable.check_check, // Replace with your image
@@ -104,10 +103,10 @@ fun CustomSnackBarDemo() {
             )
         )
 
-        SnackBar(
+        CxSnackBar(
             state = bottomSnackBarState,
             duration = 3000L,
-            position = CustomSnackBarPosition.Bottom,
+            position = CxSnackBarPosition.Bottom,
             backgroundColor = Color(0xFFE85039),
             iconColor = Color(0xFFEEEEEE),
             iconSize = 28.dp,
@@ -130,9 +129,9 @@ fun CustomSnackBarDemo() {
             )
         )
 
-        SnackBar(
+        CxSnackBar(
             state = floatingSnackBarState,
-            position = CustomSnackBarPosition.Float,
+            position = CxSnackBarPosition.Float,
             duration = 3000L,
             iconRes = lucide.check, // Replace with your image
             backgroundColor = Color(0xFF69C3EB),

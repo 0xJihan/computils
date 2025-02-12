@@ -42,7 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ExpandableCard(
+fun CxExpandableCard(
     modifier: Modifier = Modifier,
     title: String = "",
     textStyle: TextStyle = TextStyle.Default,
@@ -52,7 +52,7 @@ fun ExpandableCard(
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke? = null,
     padding: PaddingValues = PaddingValues(8.dp),
-    state: ExpandableCardState = rememberExpandableCardState(),
+    state: CxExpandableCardState = rememberCxExpandableCardState(),
     expandedContent: @Composable ColumnScope.() -> Unit,
 ) {
     val rotationState by animateFloatAsState(
@@ -123,15 +123,15 @@ fun ExpandableCard(
 
 
 @Composable
-fun rememberExpandableCardState(
+fun rememberCxExpandableCardState(
     expanded: Boolean = false,
     enabled: Boolean = true,
     onExpandedChange: ((Boolean) -> Unit)? = null,
 ) = remember {
-    ExpandableCardState(expanded, enabled, onExpandedChange)
+    CxExpandableCardState(expanded, enabled, onExpandedChange)
 }
 
-class ExpandableCardState(
+class CxExpandableCardState(
     expanded: Boolean = false,
     var enabled: Boolean = true,
     var onExpandedChange: ((Boolean) -> Unit)? = null,
@@ -157,7 +157,7 @@ class ExpandableCardState(
 }
 
 @Composable
-fun rememberExpandableCardGroupState(
+fun rememberCxExpandableCardGroupState(
     count: Int,
     allowMultipleOpen: Boolean = false,
 ): AccordionGroupState {
@@ -168,10 +168,10 @@ class AccordionGroupState(
     count: Int,
     private val allowMultipleOpen: Boolean,
 ) {
-    private val states = List(count) { ExpandableCardState() }
+    private val states = List(count) { CxExpandableCardState() }
     private var openedIndex by mutableIntStateOf(-1)
 
-    fun getState(index: Int): ExpandableCardState {
+    fun getState(index: Int): CxExpandableCardState {
         val state = states[index]
         state.onExpandedChange = { isExpanded ->
             if (allowMultipleOpen) {

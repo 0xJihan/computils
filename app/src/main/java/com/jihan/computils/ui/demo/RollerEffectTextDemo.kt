@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.RollerEffectText
+import com.jihan.composeutils.CxRollerEffectText
 
 @Composable
 fun RollerEffectTextDemo() {
@@ -23,7 +23,7 @@ fun RollerEffectTextDemo() {
         mutableIntStateOf(0)
     }
 
-    RollerEffectText(
+    CxRollerEffectText(
         count = count,
         style = TextStyle(
             color = Color(0xFF3E3E3E),

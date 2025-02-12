@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.filter
 
 
 @Composable
-fun ExposedDropdownMenu(
+fun CxExposedDropdownMenu(
     items: List<String>,
     onItemSelected: (String,Int) -> Unit,
 ) {

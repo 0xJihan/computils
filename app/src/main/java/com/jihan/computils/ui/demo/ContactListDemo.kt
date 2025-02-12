@@ -9,7 +9,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jihan.composeutils.Contact
-import com.jihan.composeutils.ContactList
+import com.jihan.composeutils.CxContactList
 import com.jihan.lucide_icons.lucide
 
 @Composable
@@ -18,7 +18,7 @@ fun ContactListDemo() {
         "Aurora, Aria, Asher, Benjamin, Bianca, Beatrix, Caleb, Clara, Chloe, Daniel, Delilah, Diana, Elijah, Emily, Evangeline, Finnegan, Freya, Fiona, Gabriel, Grace, Gwendolyn, Henry, Harper, Helena, Isaac, Isabella, Ivy, James, Jasmine, Juliette, Kieran, Katherine, Kai, Liam, Lily, Luna, Mason, Madison, Maya, Noah, Natalie, Nora, Oliver, Olivia, Octavia, Peter, Penelope, Phoebe, Quentin, Quinn, Ryan, Rachel, Rose, Samuel, Sophia, Scarlett, Thomas, Taylor, Thea, Uriah, Uma, Victor, Violet, Vanessa, William, Willow, Wren, Xavier, Xena, Yasmine, Yara, Zachary, Zoe, Zara"
     val contacts = names.split(", ").map { Contact(it,lucide.user_round) }
 
-    ContactList(
+    CxContactList(
         contacts = contacts,
         scrollingBubbleColor = Color(0xFF73D3BB),
         scrollingBubbleTextStyle = MaterialTheme.typography.titleLarge.copy(

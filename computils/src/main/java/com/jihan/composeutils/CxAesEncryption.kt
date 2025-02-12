@@ -9,7 +9,7 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
-class AESEncryption(
+class CxEncryption(
     private val secretKey: String,
     private val salt: ByteArray = generateRandomBytes(16),
     private val iterationCount: Int = 65536,
@@ -44,9 +44,9 @@ class AESEncryption(
             if (javaClass != other?.javaClass) return false
 
             other as EncryptedData
-            return ciphertext.contentEquals(other.ciphertext) &&
-                    iv.contentEquals(other.iv) &&
-                    salt.contentEquals(other.salt)
+            return ciphertext.contentEquals(other.ciphertext) && iv.contentEquals(other.iv) && salt.contentEquals(
+                other.salt
+            )
         }
 
         override fun hashCode(): Int {
@@ -77,7 +77,7 @@ class AESEncryption(
 
         val encryptedString = Base64.encodeToString(encrypted, Base64.DEFAULT)
 
-        return EncryptedData(encrypted, iv, salt,encryptedString)
+        return EncryptedData(encrypted, iv, salt, encryptedString)
     }
 
     fun decrypt(encryptedData: EncryptedData): String {

@@ -29,7 +29,7 @@ fun CxButton(
     cornerRadius: Int = 4,
     loading: Boolean = false,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
-    onLoadingContent: @Composable () -> Unit = { OrbitLoading(Modifier.size(24.dp)) },
+    onLoadingContent: @Composable () -> Unit = { CxOrbitLoading(Modifier.size(24.dp)) },
     onClick: () -> Unit,
 ) {
     Button(
@@ -64,7 +64,7 @@ fun CxElevatedButton(
     cornerRadius: Int = 4,
     loading: Boolean = false,
     colors: ButtonColors = ButtonDefaults.elevatedButtonColors(),
-    onLoadingContent: @Composable () -> Unit = { OrbitLoading(Modifier.size(24.dp)) },
+    onLoadingContent: @Composable () -> Unit = { CxOrbitLoading(Modifier.size(24.dp)) },
     onClick: () -> Unit,
 ) {
     ElevatedButton(
@@ -98,7 +98,7 @@ fun CxOutlinedButton(
     cornerRadius: Int = 4,
     loading: Boolean = false,
     colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
-    onLoadingContent: @Composable () -> Unit = { OrbitLoading(Modifier.size(24.dp)) },
+    onLoadingContent: @Composable () -> Unit = { CxOrbitLoading(Modifier.size(24.dp)) },
     onClick: () -> Unit,
 ) {
     OutlinedButton(
@@ -131,7 +131,7 @@ fun CxTextButton(
     enabled: Boolean = true,
     loading: Boolean = false,
     colors: ButtonColors = ButtonDefaults.textButtonColors(),
-    onLoadingContent: @Composable () -> Unit = { OrbitLoading(Modifier.size(24.dp)) },
+    onLoadingContent: @Composable () -> Unit = { CxOrbitLoading(Modifier.size(24.dp)) },
     onClick: () -> Unit,
 ) {
     TextButton(

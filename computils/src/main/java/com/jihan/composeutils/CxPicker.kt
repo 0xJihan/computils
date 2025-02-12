@@ -44,7 +44,7 @@ class PickerState {
 
 
 @Composable
-fun Picker(
+fun CxPicker(
     items: List<String>,
     state: PickerState = rememberPickerState(),
     modifier: Modifier = Modifier,

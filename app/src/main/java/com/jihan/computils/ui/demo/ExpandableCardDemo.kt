@@ -9,10 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.ExpandableCard
+import com.jihan.composeutils.CxExpandableCard
 import com.jihan.composeutils.Gap
-import com.jihan.composeutils.rememberExpandableCardGroupState
-import com.jihan.composeutils.rememberExpandableCardState
+import com.jihan.composeutils.rememberCxExpandableCardGroupState
+import com.jihan.composeutils.rememberCxExpandableCardState
 import com.jihan.composeutils.text
 
 @Composable
@@ -21,8 +21,8 @@ fun ExpandableCardDemo() {
     Column { 
         
     // Standalone usage
-    val state = rememberExpandableCardState()
-    ExpandableCard(
+    val state = rememberCxExpandableCardState()
+    CxExpandableCard(
         title = "My Card",
         state = state
     ) {
@@ -36,8 +36,8 @@ fun ExpandableCardDemo() {
     HorizontalDivider(modifier = Modifier.fillMaxWidth().height(2.dp).background(Color.Gray))
 Gap(10)
 // As part of a group
-    val groupState = rememberExpandableCardGroupState(count = 3)
-    ExpandableCard(
+    val groupState = rememberCxExpandableCardGroupState(count = 3)
+    CxExpandableCard(
         title = "Card 1",
         state = groupState.getState(0)
     ) {
@@ -49,7 +49,7 @@ Gap(10)
 
 
         Gap(10)
-        ExpandableCard(
+        CxExpandableCard(
             title = "Card 2",
             state = groupState.getState(1)
         ) {
@@ -61,7 +61,7 @@ Gap(10)
 
         Gap(10)
 
-        ExpandableCard(
+        CxExpandableCard(
             title = "Card 3",
             state = groupState.getState(2)
         ) {

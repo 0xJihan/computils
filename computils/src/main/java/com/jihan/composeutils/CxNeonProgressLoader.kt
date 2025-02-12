@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NeonProgressLoader(
+fun CxNeonProgressLoader(
     modifier: Modifier = Modifier,
     size: Dp = 100.dp,
     animDuration: Int = 800,

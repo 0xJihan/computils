@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.Picker
+import com.jihan.composeutils.CxPicker
 import com.jihan.composeutils.rememberPickerState
 
 @Composable
@@ -30,7 +30,7 @@ fun NumberPickerDemo() {
         val values = remember { (1..9999).map { it.toString() } }
         val valuesPickerState = rememberPickerState()
 
-        Picker(
+        CxPicker(
             state = valuesPickerState,
             items = values,
             visibleItemsCount = 5,

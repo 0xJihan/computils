@@ -4,12 +4,9 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -24,9 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 
 
-
 @Composable
-fun MultiStepLoader(
+fun CxMultiStepLoader(
     modifier: Modifier = Modifier,
     size: Dp = 100.dp,
     spacing: Dp = 10.dp,
@@ -34,21 +30,19 @@ fun MultiStepLoader(
     progressList: List<ProgressItem> = ArrayList()
 ) {
     val density = LocalDensity.current
-    val spacingDp = (-(2.dp/5.dp) * strokeWidth) + spacing
+    val spacingDp = (-(2.dp / 5.dp) * strokeWidth) + spacing
 
     Box(
         modifier = modifier
     ) {
         var index = 0
-        progressList.forEach{ progressBar ->
-            val progressSize = size + (
-                    density.run {
-                        (strokeWidth + spacingDp).toPx()
-                    }.dp * index)
+        progressList.forEach { progressBar ->
+            val progressSize = size + (density.run {
+                (strokeWidth + spacingDp).toPx()
+            }.dp * index)
             index += 1
-            ArcProgressBar(
-                modifier = Modifier
-                    .align(Alignment.Center),
+            CxArcProgressBar(
+                modifier = Modifier.align(Alignment.Center),
                 progressColor = progressBar.progressColor,
                 trackColor = progressBar.trackColor,
                 progress = progressBar.progress,
@@ -65,7 +59,7 @@ fun MultiStepLoader(
 }
 
 @Composable
-fun ArcProgressBar(
+fun CxArcProgressBar(
     modifier: Modifier = Modifier,
     progress: Float = 100f,
     strokeWidth: Dp = 10.dp,
@@ -85,8 +79,7 @@ fun ArcProgressBar(
     val sweepAngle = (animatedProgress.value / 100) * 360
 
     Canvas(
-        modifier = modifier
-            .size(size)
+        modifier = modifier.size(size)
     ) {
         drawArc(
             color = trackColor,

@@ -10,11 +10,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.RangeSliderWithPin
+import com.jihan.composeutils.CxRangeSliderWithPin
 
 @Composable
 fun RangeSliderWithPinDemo() {
-    RangeSliderWithPin(
+    CxRangeSliderWithPin(
         modifier = Modifier
             .padding(horizontal = 48.dp)
             .fillMaxWidth(),

@@ -1,8 +1,6 @@
 package com.jihan.composeutils
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonColors
@@ -20,14 +18,17 @@ fun CxSegmentedButton(
     modifier: Modifier = Modifier,
     buttonArray: List<String>,
     currentItem: Int,
-    title:String="",
-    color: SegmentedButtonColors=SegmentedButtonDefaults.colors(),
+    title: String = "",
+    color: SegmentedButtonColors = SegmentedButtonDefaults.colors(),
     shape: Shape = RectangleShape,
     onSegmentSelected: (Int) -> Unit
 ) {
 
-    if (title.isNotEmpty())
-    Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(vertical = 4.dp))
+    if (title.isNotEmpty()) Text(
+        title,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(vertical = 4.dp)
+    )
     SingleChoiceSegmentedButtonRow(modifier = modifier) {
         buttonArray.forEachIndexed { index, text ->
 

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 
 @Composable
-fun RollerEffectText(
+fun CxRollerEffectText(
     modifier: Modifier = Modifier, count: Int, style: TextStyle = TextStyle.Default
 ) {
     var oldCount by remember {
@@ -46,9 +46,9 @@ fun RollerEffectText(
                 targetState = char, transitionSpec = {
                     slideInVertically { it } togetherWith slideOutVertically { -it }
                 }, label = "Text Animation"
-            ) { char ->
+            ) { c ->
                 Text(
-                    text = char.toString(), style = style, softWrap = false
+                    text = c.toString(), style = style, softWrap = false
                 )
             }
         }

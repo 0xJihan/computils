@@ -4,9 +4,7 @@ import android.view.MotionEvent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -30,12 +28,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -43,7 +38,7 @@ import kotlin.math.sqrt
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun RangeSliderWithPin(
+fun CxRangeSliderWithPin(
     modifier: Modifier = Modifier,
     trackThickness: Dp = 10.dp,
     trackColor: Color = Color.Red,
@@ -111,9 +106,7 @@ fun RangeSliderWithPin(
             2f
         } else {
             1f
-        },
-        animationSpec = tween(durationMillis = 300),
-        label = ""
+        }, animationSpec = tween(durationMillis = 300), label = ""
     )
 
     val scaleAnim2 by animateFloatAsState(
@@ -121,9 +114,7 @@ fun RangeSliderWithPin(
             2f
         } else {
             1f
-        },
-        animationSpec = tween(durationMillis = 300),
-        label = ""
+        }, animationSpec = tween(durationMillis = 300), label = ""
     )
 
     val tooltipAnim1 by animateFloatAsState(
@@ -131,9 +122,7 @@ fun RangeSliderWithPin(
             -180f
         } else {
             0f
-        },
-        animationSpec = tween(durationMillis = 300),
-        label = ""
+        }, animationSpec = tween(durationMillis = 300), label = ""
     )
 
     val path = remember {
@@ -143,73 +132,65 @@ fun RangeSliderWithPin(
     val textMeasurer = rememberTextMeasurer()
 
 
-    Canvas(
-        modifier = modifier
-            .height(trackThickness)
-            .pointerInteropFilter(
-                onTouchEvent = { motionEvent ->
-                    when (motionEvent.action) {
-                        MotionEvent.ACTION_DOWN -> {
-                            val x = motionEvent.x
-                            val y = motionEvent.y
-                            val dis1 = sqrt(
-                                (x - leftPinOffset.x).pow(2) + (y - leftPinOffset.y).pow(2)
-                            )
-                            val dis2 = sqrt(
-                                (x - rightPinOffset.x).pow(2) + (y - rightPinOffset.y).pow(
-                                    2
-                                )
-                            )
+    Canvas(modifier = modifier
+        .height(trackThickness)
+        .pointerInteropFilter(onTouchEvent = { motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    val x = motionEvent.x
+                    val y = motionEvent.y
+                    val dis1 = sqrt(
+                        (x - leftPinOffset.x).pow(2) + (y - leftPinOffset.y).pow(2)
+                    )
+                    val dis2 = sqrt(
+                        (x - rightPinOffset.x).pow(2) + (y - rightPinOffset.y).pow(
+                            2
+                        )
+                    )
 
-                            if (dis1 < circleRadiusInPx) {
-                                leftPinDragging = true
-                            } else if (dis2 < circleRadiusInPx) {
-                                rightPinDragging = true
-                            }
-                        }
-
-                        MotionEvent.ACTION_MOVE -> {
-                            val x = motionEvent.x
-
-                            if (leftPinDragging) {
-                                startProgressValue = if (x <= 0) {
-                                    0f
-                                } else if (x >= width * endProgressValue) {
-                                    endProgressValue
-                                } else {
-                                    x / width
-                                }
-                                leftPinOffset =
-                                    leftPinOffset.copy(x = width * startProgressValue)
-                            } else if (rightPinDragging) {
-                                endProgressValue = if (x >= width) {
-                                    1f
-                                } else if (x <= width * startProgressValue) {
-                                    startProgressValue
-                                } else {
-                                    x / width
-                                }
-                                rightPinOffset =
-                                    rightPinOffset.copy(x = width * endProgressValue)
-                            }
-                        }
-
-                        MotionEvent.ACTION_UP -> {
-                            leftPinDragging = false
-                            rightPinDragging = false
-                            onProgressChanged(startProgressValue, endProgressValue)
-                        }
+                    if (dis1 < circleRadiusInPx) {
+                        leftPinDragging = true
+                    } else if (dis2 < circleRadiusInPx) {
+                        rightPinDragging = true
                     }
-                    true
                 }
-            )
-            .onGloballyPositioned {
-                leftPinOffset =
-                    Offset(x = it.size.width * startProgressValue, y = it.size.height / 2f)
-                rightPinOffset =
-                    Offset(x = it.size.width * endProgressValue, y = it.size.height / 2f)
+
+                MotionEvent.ACTION_MOVE -> {
+                    val x = motionEvent.x
+
+                    if (leftPinDragging) {
+                        startProgressValue = if (x <= 0) {
+                            0f
+                        } else if (x >= width * endProgressValue) {
+                            endProgressValue
+                        } else {
+                            x / width
+                        }
+                        leftPinOffset = leftPinOffset.copy(x = width * startProgressValue)
+                    } else if (rightPinDragging) {
+                        endProgressValue = if (x >= width) {
+                            1f
+                        } else if (x <= width * startProgressValue) {
+                            startProgressValue
+                        } else {
+                            x / width
+                        }
+                        rightPinOffset = rightPinOffset.copy(x = width * endProgressValue)
+                    }
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    leftPinDragging = false
+                    rightPinDragging = false
+                    onProgressChanged(startProgressValue, endProgressValue)
+                }
             }
-    ) {
+            true
+        })
+        .onGloballyPositioned {
+            leftPinOffset = Offset(x = it.size.width * startProgressValue, y = it.size.height / 2f)
+            rightPinOffset = Offset(x = it.size.width * endProgressValue, y = it.size.height / 2f)
+        }) {
         width = this.size.width
         height = this.size.height
 
@@ -236,9 +217,7 @@ fun RangeSliderWithPin(
             )
         }
         drawCircle(
-            color = startPinCircleColor,
-            radius = pinCircleSize.toPx(),
-            center = leftPinOffset
+            color = startPinCircleColor, radius = pinCircleSize.toPx(), center = leftPinOffset
         )
 
         //draw end pin circle
@@ -250,19 +229,15 @@ fun RangeSliderWithPin(
             )
         }
         drawCircle(
-            color = endPinCircleColor,
-            radius = pinCircleSize.toPx(),
-            center = rightPinOffset
+            color = endPinCircleColor, radius = pinCircleSize.toPx(), center = rightPinOffset
         )
 
         // draw start pin
         val leftL = leftPinOffset.x - pinWidth.toPx() / 2f
-        val topL = leftPinOffset.y - pinSpacing.toPx() -
-                circleRadiusInPx - pinHeight.toPx()
+        val topL = leftPinOffset.y - pinSpacing.toPx() - circleRadiusInPx - pinHeight.toPx()
 
         val leftR = rightPinOffset.x - pinWidth.toPx() / 2f
-        val topR = rightPinOffset.y - pinSpacing.toPx() -
-                circleRadiusInPx - pinHeight.toPx()
+        val topR = rightPinOffset.y - pinSpacing.toPx() - circleRadiusInPx - pinHeight.toPx()
 
         if (leftPinDragging || rightPinDragging) {
             leftPinOverlapping.value = (leftL + pinWidth.toPx()) >= leftR
@@ -287,8 +262,7 @@ fun RangeSliderWithPin(
                     relativeLineTo(8.dp.toPx(), 8.dp.toPx())
                     relativeLineTo(8.dp.toPx(), -8.dp.toPx())
                     close()
-                },
-                color = startPinColor
+                }, color = startPinColor
             )
         }
 
@@ -312,21 +286,18 @@ fun RangeSliderWithPin(
                 relativeLineTo(8.dp.toPx(), 8.dp.toPx())
                 relativeLineTo(8.dp.toPx(), -8.dp.toPx())
                 close()
-            },
-            color = endPinColor
+            }, color = endPinColor
         )
 
         val textLeft = (startProgressValue * 100).roundToInt().toString()
         var textLayoutResult = textMeasurer.measure(
-            text = AnnotatedString(textLeft),
-            style = startPinTextStyle
+            text = AnnotatedString(textLeft), style = startPinTextStyle
         )
         var textSize = textLayoutResult.size
 
         rotate(tooltipAnim1, pivot = leftPinOffset) {
             drawText(
-                textLayoutResult = textLayoutResult,
-                topLeft = Offset(
+                textLayoutResult = textLayoutResult, topLeft = Offset(
                     x = leftL + pinWidth.toPx() / 2 - textSize.width / 2,
                     y = topL + pinHeight.toPx() / 2 - textSize.height / 2
                 )
@@ -335,8 +306,7 @@ fun RangeSliderWithPin(
 
         val textRight = (endProgressValue * 100).roundToInt().toString()
         textLayoutResult = textMeasurer.measure(
-            text = AnnotatedString(textRight),
-            style = endPinTextStyle
+            text = AnnotatedString(textRight), style = endPinTextStyle
         )
         textSize = textLayoutResult.size
 
@@ -351,8 +321,7 @@ fun RangeSliderWithPin(
 }
 
 fun ClosedFloatingPointRange<Float>.convert(
-    number: Float,
-    target: ClosedFloatingPointRange<Float>
+    number: Float, target: ClosedFloatingPointRange<Float>
 ): Float {
     val ratio = number / (endInclusive - start)
     return ratio * (target.endInclusive - target.start)

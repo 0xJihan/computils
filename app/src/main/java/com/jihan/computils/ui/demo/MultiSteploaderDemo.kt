@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.MultiStepLoader
+import com.jihan.composeutils.CxMultiStepLoader
 import com.jihan.composeutils.ProgressItem
 
 @Composable
@@ -17,7 +17,7 @@ fun MultiStepLoaderDemo() {
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        MultiStepLoader(
+        CxMultiStepLoader(
             modifier = Modifier
                 .fillMaxSize(),
             size = 100.dp,

@@ -44,10 +44,10 @@ import kotlin.concurrent.schedule
 
 
 @Composable
-fun SnackBar(
+fun CxSnackBar(
     modifier: Modifier = Modifier,
-    state: CustomSnackBarState,
-    position: CustomSnackBarPosition = CustomSnackBarPosition.Bottom,
+    state: CxSnackBarState,
+    position: CxSnackBarPosition = CxSnackBarPosition.Bottom,
     duration: Long = 3000L,
     iconRes: Int = android.R.drawable.ic_menu_help, // Replace with your image
     iconSize: Dp = 24.dp,
@@ -57,17 +57,17 @@ fun SnackBar(
     enterAnimation: EnterTransition = expandVertically(
         animationSpec = tween(delayMillis = 300),
         expandFrom = when(position) {
-            is CustomSnackBarPosition.Top -> Alignment.Top
-            is CustomSnackBarPosition.Bottom -> Alignment.Bottom
-            is CustomSnackBarPosition.Float -> Alignment.CenterVertically
+            is CxSnackBarPosition.Top -> Alignment.Top
+            is CxSnackBarPosition.Bottom -> Alignment.Bottom
+            is CxSnackBarPosition.Float -> Alignment.CenterVertically
         }
     ),
     exitAnimation: ExitTransition = shrinkVertically(
         animationSpec = tween(delayMillis = 300),
         shrinkTowards =  when(position) {
-            is CustomSnackBarPosition.Top -> Alignment.Top
-            is CustomSnackBarPosition.Bottom -> Alignment.Bottom
-            is CustomSnackBarPosition.Float -> Alignment.CenterVertically
+            is CxSnackBarPosition.Top -> Alignment.Top
+            is CxSnackBarPosition.Bottom -> Alignment.Bottom
+            is CxSnackBarPosition.Float -> Alignment.CenterVertically
         }
     ),
     verticalPadding: Dp = 12.dp,
@@ -99,29 +99,29 @@ fun SnackBar(
                 .fillMaxSize()
                 .padding(
                     bottom = when (position) {
-                        is CustomSnackBarPosition.Top -> 0.dp
-                        is CustomSnackBarPosition.Bottom -> 0.dp
-                        is CustomSnackBarPosition.Float -> 24.dp
+                        is CxSnackBarPosition.Top -> 0.dp
+                        is CxSnackBarPosition.Bottom -> 0.dp
+                        is CxSnackBarPosition.Float -> 24.dp
                     }
                 ),
             verticalArrangement = when(position) {
-                is CustomSnackBarPosition.Top -> Arrangement.Top
-                is CustomSnackBarPosition.Bottom -> Arrangement.Bottom
-                is CustomSnackBarPosition.Float -> Arrangement.Bottom
+                is CxSnackBarPosition.Top -> Arrangement.Top
+                is CxSnackBarPosition.Bottom -> Arrangement.Bottom
+                is CxSnackBarPosition.Float -> Arrangement.Bottom
             },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AnimatedVisibility(
                 visible = state.isNotEmpty() && showSnackBar,
                 enter = when(position) {
-                    is CustomSnackBarPosition.Top -> enterAnimation
-                    is CustomSnackBarPosition.Bottom -> enterAnimation
-                    is CustomSnackBarPosition.Float -> fadeIn()
+                    is CxSnackBarPosition.Top -> enterAnimation
+                    is CxSnackBarPosition.Bottom -> enterAnimation
+                    is CxSnackBarPosition.Float -> fadeIn()
                 },
                 exit = when(position) {
-                    is CustomSnackBarPosition.Top -> exitAnimation
-                    is CustomSnackBarPosition.Bottom -> exitAnimation
-                    is CustomSnackBarPosition.Float -> fadeOut()
+                    is CxSnackBarPosition.Top -> exitAnimation
+                    is CxSnackBarPosition.Bottom -> exitAnimation
+                    is CxSnackBarPosition.Float -> fadeOut()
                 }
             ) {
                 SnackBarItem(
@@ -143,7 +143,7 @@ fun SnackBar(
 @Composable
 fun SnackBarItem(
     message: String?,
-    position: CustomSnackBarPosition,
+    position: CxSnackBarPosition,
     backgroundColor: Color,
     iconColor: Color,
     iconSize: Dp,
@@ -156,17 +156,17 @@ fun SnackBarItem(
         modifier = Modifier
             .fillMaxWidth(
                 fraction = when (position) {
-                    is CustomSnackBarPosition.Top -> 1f
-                    is CustomSnackBarPosition.Bottom -> 1f
-                    is CustomSnackBarPosition.Float -> 0.8f
+                    is CxSnackBarPosition.Top -> 1f
+                    is CxSnackBarPosition.Bottom -> 1f
+                    is CxSnackBarPosition.Float -> 0.8f
                 }
             )
             .background(
                 color = backgroundColor,
                 shape = when (position) {
-                    is CustomSnackBarPosition.Top -> RectangleShape
-                    is CustomSnackBarPosition.Bottom -> RectangleShape
-                    is CustomSnackBarPosition.Float -> RoundedCornerShape(8.dp)
+                    is CxSnackBarPosition.Top -> RectangleShape
+                    is CxSnackBarPosition.Bottom -> RectangleShape
+                    is CxSnackBarPosition.Float -> RoundedCornerShape(8.dp)
                 }
             )
             .padding(vertical = verticalPadding)
@@ -199,16 +199,16 @@ fun SnackBarItem(
     }
 }
 
-sealed class CustomSnackBarPosition {
+sealed class CxSnackBarPosition {
 
-    data object Top: CustomSnackBarPosition()
+    data object Top: CxSnackBarPosition()
 
-    data object Bottom: CustomSnackBarPosition()
+    data object Bottom: CxSnackBarPosition()
 
-    data object Float: CustomSnackBarPosition()
+    data object Float: CxSnackBarPosition()
 }
 
-class CustomSnackBarState {
+class CxSnackBarState {
 
     private val _message = mutableStateOf<String?>(null)
     val message: State<String?> = _message

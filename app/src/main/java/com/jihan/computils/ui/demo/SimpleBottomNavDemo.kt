@@ -12,7 +12,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.SimpleBottomNav
+import com.jihan.composeutils.CxSimpleBottomNav
 import com.jihan.composeutils.SimpleBottomNavItem
 import com.jihan.lucide_icons.lucide
 
@@ -37,7 +37,7 @@ fun SimpleBottomNavDemo() {
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
     ) {
-        SimpleBottomNav(
+        CxSimpleBottomNav(
             screens = screen,
             height = 80.dp,
             backgroundColor = Color(0xFFF1F1F1),
@@ -62,7 +62,7 @@ fun SimpleBottomNavWithLineDemo() {
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
     ) {
-        SimpleBottomNav(
+        CxSimpleBottomNav(
             modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
             screens = screen,
             showDash = true,
@@ -90,7 +90,7 @@ fun SimpleBottomNavWithDotDemo() {
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
     ) {
-        SimpleBottomNav(
+        CxSimpleBottomNav(
             screens = screen,
             showDot = true,
             height = 80.dp,

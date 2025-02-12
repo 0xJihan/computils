@@ -13,18 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.SwingAnimation
+import com.jihan.composeutils.CxSwingAnimation
 
 @Composable
 fun SwingAnimationDemo() {
-    SwingAnimation(
+    CxSwingAnimation(
         modifier = Modifier
             .background(color = Color(0XFF1c8bd2))
             .size(width = 220.dp, height = 195.dp),

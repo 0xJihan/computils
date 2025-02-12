@@ -14,12 +14,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.BlurEffect
@@ -36,9 +34,7 @@ private const val ANIMATION_DURATION = 1000
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CxBlurredText(
-    text: String,
-    textStyle: TextStyle = TextStyle.Default,
-    modifier: Modifier = Modifier
+    text: String, textStyle: TextStyle = TextStyle.Default, modifier: Modifier = Modifier
 ) {
     val blurList = text.mapIndexed { index, character ->
         if (character == ' ') {
@@ -49,19 +45,13 @@ fun CxBlurredText(
             val infiniteTransition =
                 rememberInfiniteTransition(label = "infinite transition $index")
             infiniteTransition.animateFloat(
-                initialValue = 10f,
-                targetValue = 1f,
-                animationSpec = infiniteRepeatable(
+                initialValue = 10f, targetValue = 1f, animationSpec = infiniteRepeatable(
                     animation = tween(
-                        durationMillis = ANIMATION_DURATION,
-                        easing = LinearEasing
-                    ),
-                    repeatMode = RepeatMode.Reverse,
-                    initialStartOffset = StartOffset(
+                        durationMillis = ANIMATION_DURATION, easing = LinearEasing
+                    ), repeatMode = RepeatMode.Reverse, initialStartOffset = StartOffset(
                         offsetMillis = (ANIMATION_DURATION / text.length) * index
                     )
-                ),
-                label = "blur animation"
+                ), label = "blur animation"
             )
         }
     }
@@ -73,36 +63,28 @@ fun CxBlurredText(
         verticalArrangement = Arrangement.Center,
     ) {
         text.forEachIndexed { index, character ->
-            Text(
-                text = character.toString(),
-                style = textStyle,
-                modifier = Modifier
-                    .graphicsLayer {
-                        if (character != ' ') {
-                            val blurAmount = blurList[index].value
-                            renderEffect = BlurEffect(
-                                radiusX = blurAmount,
-                                radiusY = blurAmount
-                            )
-                        }
+            Text(text = character.toString(), style = textStyle, modifier = Modifier
+                .graphicsLayer {
+                    if (character != ' ') {
+                        val blurAmount = blurList[index].value
+                        renderEffect = BlurEffect(
+                            radiusX = blurAmount, radiusY = blurAmount
+                        )
                     }
-                    .then(
-                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                            Modifier.fullContentBlur(
-                                blurRadius = { blurList[index].value.roundToInt() }
-                            )
-                        } else {
-                            Modifier
-                        }
-                    )
-            )
+                }
+                .then(
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                        Modifier.fullContentBlur(blurRadius = { blurList[index].value.roundToInt() })
+                    } else {
+                        Modifier
+                    }
+                ))
         }
     }
 }
 
 private fun Modifier.fullContentBlur(
-    blurRadius: () -> Int,
-    color: Color = Color.Black
+    blurRadius: () -> Int, color: Color = Color.Black
 ): Modifier {
     return drawWithCache {
         val radius = blurRadius()
@@ -112,8 +94,7 @@ private fun Modifier.fullContentBlur(
 
             if (radius > 0) {
                 maskFilter = BlurMaskFilter(
-                    radius.toFloat(),
-                    BlurMaskFilter.Blur.NORMAL
+                    radius.toFloat(), BlurMaskFilter.Blur.NORMAL
                 )
             }
         }

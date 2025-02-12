@@ -17,8 +17,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.ExpandingFav
-import com.jihan.composeutils.FABItem
+import com.jihan.composeutils.CxExpandingFav
+import com.jihan.composeutils.CxFABItem
 import com.jihan.composeutils.FABState
 import com.jihan.lucide_icons.lucide
 
@@ -32,11 +32,11 @@ fun ExpandingFavDemo() {
             .height(400.dp),
         contentAlignment = Alignment.BottomEnd
     ) {
-        ExpandingFav(
+        CxExpandingFav(
             modifier = Modifier
                 .wrapContentSize(),
             fabList = listOf(
-                FABItem(
+                CxFABItem(
                     iconRes = lucide.plus, // Replace with your own drawables
                     iconSize = 42.dp,
                     label = "Write",
@@ -49,7 +49,7 @@ fun ExpandingFavDemo() {
 
                     }
                 ),
-                FABItem(
+                CxFABItem(
                     iconRes = lucide.youtube, // Replace with your own drawables
                     iconSize = 42.dp,
                     label = "Media",
@@ -62,7 +62,7 @@ fun ExpandingFavDemo() {
 
                     }
                 ),
-                FABItem(
+                CxFABItem(
                     iconRes = lucide.mic, // Replace with your own drawables
                     iconSize = 42.dp,
                     label = "Speak",

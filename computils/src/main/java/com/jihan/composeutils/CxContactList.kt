@@ -39,16 +39,13 @@ import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun ContactList(
+fun CxContactList(
     contacts: List<Contact>,
     scrollingBubbleColor: Color,
     scrollingBubbleTextStyle: TextStyle,
@@ -66,7 +63,7 @@ fun ContactList(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
     ) {
         BoxWithConstraints {
-            ContactListWithScroller(
+            CxContactListWithScroller(
                 contacts = contacts,
                 onAlphabetListDrag = { relativeDragYOffset, containerDistance ->
                     alphabetRelativeDragYOffset = relativeDragYOffset
@@ -80,7 +77,7 @@ fun ContactList(
 
             val yOffset = alphabetRelativeDragYOffset
             if (yOffset != null) {
-                ScrollingBubble(
+                CxScrollingBubble(
                     boxConstraintMaxWidth = this.maxWidth,
                     bubbleOffsetYFloat = yOffset + alphabetDistanceFromTopOfScreen,
                     currAlphabetScrolledOn = yOffset.getIndexOfCharBasedOnYPosition(
@@ -95,7 +92,7 @@ fun ContactList(
 }
 
 @Composable
-fun ContactListWithScroller(
+fun CxContactListWithScroller(
     contacts: List<Contact>,
     alphabetScrollerTextStyle: TextStyle,
     charStyle: TextStyle,
@@ -112,7 +109,7 @@ fun ContactListWithScroller(
         modifier = Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        ContactList(
+        CxContactList(
             Modifier
                 .fillMaxHeight()
                 .weight(1F),
@@ -142,7 +139,7 @@ fun ContactListWithScroller(
 }
 
 @Composable
-fun ContactList(
+fun CxContactList(
     modifier: Modifier,
     contacts: List<Contact>,
     lazyListState: LazyListState,
@@ -155,7 +152,7 @@ fun ContactList(
         modifier = modifier, state = lazyListState, verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(contacts) { index, contact ->
-            ContactItem(
+            CxContactItem(
                 item = contact,
                 isAlphabeticallyFirstInCharGroup = firstLetterIndexes[contact.fullName.lowercase()
                     .first()] == index,
@@ -168,7 +165,7 @@ fun ContactList(
 }
 
 @Composable
-fun ScrollingBubble(
+fun CxScrollingBubble(
     boxConstraintMaxWidth: Dp,
     bubbleOffsetYFloat: Float,
     currAlphabetScrolledOn: Char,
@@ -237,7 +234,7 @@ private fun AlphabetScroller(
 }
 
 @Composable
-fun ContactItem(
+fun CxContactItem(
     item: Contact,
     isAlphabeticallyFirstInCharGroup: Boolean,
     charStyle: TextStyle,
@@ -283,10 +280,10 @@ private val alphabetItemSize = 24.dp
 private fun List<Contact>.getFirstUniqueSeenCharIndex(): Map<Char, Int> {
     val firstLetterIndexes = mutableMapOf<Char, Int>()
     this.map { it.fullName.lowercase().first() }.forEachIndexed { index, char ->
-            if (!firstLetterIndexes.contains(char)) {
-                firstLetterIndexes[char] = index
-            }
+        if (!firstLetterIndexes.contains(char)) {
+            firstLetterIndexes[char] = index
         }
+    }
     return firstLetterIndexes
 }
 

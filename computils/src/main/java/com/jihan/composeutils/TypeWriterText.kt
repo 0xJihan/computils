@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 import kotlin.streams.toList
 
 @Composable
-fun TypewriterText(
+fun CxTypewriterText(
     modifier: Modifier = Modifier,
     texts: List<String>,
     textStyle: TextStyle = TextStyle.Default,

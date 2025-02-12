@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jihan.composeutils.CenterBox
-import com.jihan.computils.ui.demo.ExpandableCardDemo
+import com.jihan.composeutils.CxWheelTimePicker
 import com.jihan.computils.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ComposeUtils() {
     Scaffold {
@@ -38,7 +39,8 @@ fun ComposeUtils() {
         CenterBox(Modifier
             .padding(it)
             .padding(16.dp)) {
-            ExpandableCardDemo()
+//            ExpandableCardDemo()
+            CxWheelTimePicker()
         }
     }
 }

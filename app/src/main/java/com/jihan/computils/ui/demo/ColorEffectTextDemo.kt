@@ -7,11 +7,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.ColorEffectText
+import com.jihan.composeutils.CxColorEffectText
 
 @Composable
 fun ColorEffectTextDemo() {
-    ColorEffectText(
+    CxColorEffectText(
         text = "Don’t allow people to dim your shine because they are blinded.",
         textStyle = TextStyle(
             fontFamily = FontFamily.SansSerif,

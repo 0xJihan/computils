@@ -28,7 +28,12 @@ private const val POSITION_START_OFFSET_OUTER_CIRCLE = 90f
 private const val POSITION_START_OFFSET_INNER_CIRCLE = 135f
 
 @Composable
-fun OrbitLoading(modifier: Modifier = Modifier) {
+fun CxOrbitLoading(modifier: Modifier = Modifier,
+                   paddingOuterCircle: Float = PADDING_PERCENTAGE_OUTER_CIRCLE,
+                     paddingInnerCircle: Float = PADDING_PERCENTAGE_INNER_CIRCLE,
+                        positionStartOffsetOuterCircle: Float = POSITION_START_OFFSET_OUTER_CIRCLE,
+                        positionStartOffsetInnerCircle: Float = POSITION_START_OFFSET_INNER_CIRCLE
+                   ) {
     val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
     val rotation by infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -63,11 +68,11 @@ fun OrbitLoading(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(
                     with(LocalDensity.current) {
-                        (width * PADDING_PERCENTAGE_INNER_CIRCLE).toDp()
+                        (width * paddingInnerCircle).toDp()
                     }
                 )
                 .graphicsLayer {
-                    rotationZ = rotation + POSITION_START_OFFSET_INNER_CIRCLE
+                    rotationZ = rotation + positionStartOffsetInnerCircle
                 }
         )
         CircularProgressIndicator(
@@ -76,11 +81,11 @@ fun OrbitLoading(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(
                     with(LocalDensity.current) {
-                        (width * PADDING_PERCENTAGE_OUTER_CIRCLE).toDp()
+                        (width * paddingOuterCircle).toDp()
                     }
                 )
                 .graphicsLayer {
-                    rotationZ = rotation + POSITION_START_OFFSET_OUTER_CIRCLE
+                    rotationZ = rotation + positionStartOffsetOuterCircle
                 }
         )
     }

@@ -19,7 +19,7 @@ class ScaledThirdBrush(val shaderBrush: ShaderBrush): ShaderBrush() {
 }
 
 @Composable
-fun ColorEffectText(
+fun CxColorEffectText(
     modifier: Modifier = Modifier,
     text: String = "",
     textStyle: TextStyle = TextStyle.Default,

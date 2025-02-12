@@ -43,10 +43,10 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ExpandingFav(
+fun CxExpandingFav(
     modifier: Modifier = Modifier,
     fabText: String,
-    fabList: List<FABItem>,
+    fabList: List<CxFABItem>,
     fabSize: Dp = 60.dp,
     fabIcon: ImageVector = Icons.Rounded.Add,
     fabIconSize: Dp = 28.dp,
@@ -104,7 +104,7 @@ fun ExpandingFav(
             verticalArrangement = Arrangement.spacedBy(itemSpacing)
         ) {
             items(fabList.size) { index ->
-                Item(
+                CxItem(
                     modifier = Modifier, item = fabList[index]
                 )
             }
@@ -143,8 +143,8 @@ fun ExpandingFav(
 }
 
 @Composable
-fun Item(
-    modifier: Modifier, item: FABItem
+fun CxItem(
+    modifier: Modifier, item: CxFABItem
 ) {
     require(!((item.color) != null && (item.brush) != null)) {
         "Only one of color or brush can be specified, not both."
@@ -181,7 +181,7 @@ fun Item(
     }
 }
 
-data class FABItem(
+data class CxFABItem(
     @DrawableRes val iconRes: Int,
     val iconSize: Dp,
     val label: String = "",

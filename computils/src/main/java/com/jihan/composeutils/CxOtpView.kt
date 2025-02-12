@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun OtpView(
+fun CxOtpView(
     modifier: Modifier = Modifier,
     otpText: String,
     spacedBy: Dp = 6.dp,

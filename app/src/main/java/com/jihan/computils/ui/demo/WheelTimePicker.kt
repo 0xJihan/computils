@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jihan.composeutils.TimeFormat
 import com.jihan.composeutils.WheelPickerDefaults
-import com.jihan.composeutils.WheelTimePicker
+import com.jihan.composeutils.CxWheelTimePicker
 import com.jihan.composeutils.timeToString
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -37,7 +37,7 @@ fun WheelTimePickerDemo() {
     var selectedDate by remember { mutableStateOf("") }
 
     if (showSheet) {
-        WheelTimePicker(modifier = Modifier.fillMaxWidth(),
+        CxWheelTimePicker(modifier = Modifier.fillMaxWidth(),
             titleStyle = TextStyle(
                 fontSize = 16.sp,
                 lineHeight = 18.sp,

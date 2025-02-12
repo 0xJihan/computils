@@ -13,10 +13,8 @@ import androidx.compose.animation.core.animateTo
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.rememberSplineBasedDecay
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollScope
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -50,7 +48,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -71,7 +68,7 @@ import kotlin.math.roundToInt
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WheelTimePicker(
+fun CxWheelTimePicker(
     modifier: Modifier = Modifier,
     title: String = "TIME PICKER",
     doneLabel: String = "Done",
@@ -116,7 +113,7 @@ fun WheelTimePicker(
                 thickness = (0.5).dp,
                 color = Color.LightGray
             )
-            CustomTimePicker(
+            CxCustomTimePicker(
                 textColor = textColor,
                 timeFormat = timeFormat,
                 selectorProperties = selectorProperties,
@@ -136,7 +133,7 @@ fun WheelTimePicker(
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CustomTimePicker(
+fun CxCustomTimePicker(
     modifier: Modifier = Modifier,
     startTime: LocalTime = LocalTime.now(),
     minTime: LocalTime = LocalTime.MIN,
@@ -230,7 +227,7 @@ internal fun DefaultWheelTimePicker(
         Row(
             Modifier.fillMaxWidth(0.8f),
         ) {
-            WheelTextPicker(modifier = Modifier.weight(1f),
+            CxWheelTextPicker(modifier = Modifier.weight(1f),
                 startIndex = if (timeFormat == TimeFormat.HOUR_24) {
                     hours.find { it.value == startTime.hour }?.index ?: 0
                 } else amPmHours.find { it.value == localTimeToAmPmHour(startTime) }?.index ?: 0,
@@ -273,11 +270,11 @@ internal fun DefaultWheelTimePicker(
                             SnappedTime.Hour(
                                 localTime = snappedTime, index = newIndex
                             ), timeFormat
-                        )?.let { return@WheelTextPicker it }
+                        )?.let { return@CxWheelTextPicker it }
                     }
                 }
 
-                return@WheelTextPicker if (timeFormat == TimeFormat.HOUR_24) {
+                return@CxWheelTextPicker if (timeFormat == TimeFormat.HOUR_24) {
                     hours.find { it.value == snappedTime.hour }?.index
                 } else {
                     amPmHours.find { it.value == localTimeToAmPmHour(snappedTime) }?.index
@@ -290,7 +287,7 @@ internal fun DefaultWheelTimePicker(
                     text = ":", style = textStyle, color = textColor
                 )
             }
-            WheelTextPicker(
+            CxWheelTextPicker(
                 modifier = Modifier.weight(1f),
                 startIndex = minutes.find { it.value == startTime.minute }?.index ?: 0,
                 size = DpSize(
@@ -330,15 +327,15 @@ internal fun DefaultWheelTimePicker(
                                 SnappedTime.Minute(
                                     localTime = snappedTime, index = newIndex
                                 ), timeFormat
-                            )?.let { return@WheelTextPicker it }
+                            )?.let { return@CxWheelTextPicker it }
                         }
                     }
                 }
 
-                return@WheelTextPicker minutes.find { it.value == snappedTime.minute }?.index
+                return@CxWheelTextPicker minutes.find { it.value == snappedTime.minute }?.index
             }
             if (timeFormat == TimeFormat.AM_PM) {
-                WheelTextPicker(
+                CxWheelTextPicker(
                     modifier = Modifier.weight(1f),
                     startIndex = amPms.find { it.value == amPmValueFromTime(startTime) }?.index
                         ?: 0,
@@ -389,7 +386,7 @@ internal fun DefaultWheelTimePicker(
                         }
                     }
 
-                    return@WheelTextPicker snappedIndex
+                    return@CxWheelTextPicker snappedIndex
                 }
             }
             Spacer(modifier = Modifier.weight(0.7f))
@@ -398,7 +395,7 @@ internal fun DefaultWheelTimePicker(
 }
 
 @Composable
-fun WheelTextPicker(
+fun CxWheelTextPicker(
     modifier: Modifier = Modifier,
     startIndex: Int = 0,
     size: DpSize = DpSize(128.dp, 128.dp),

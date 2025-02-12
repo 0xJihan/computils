@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.jihan.composeutils.ExposedDropdownMenu
 import com.jihan.composeutils.coloredShadow
-import com.jihan.composeutils.gap
+import com.jihan.composeutils.Gap
 import com.jihan.composeutils.text
 import com.jihan.computils.ui.demo.ColoredShadowDemo
 import com.jihan.computils.ui.demo.CustomSnackBarDemo

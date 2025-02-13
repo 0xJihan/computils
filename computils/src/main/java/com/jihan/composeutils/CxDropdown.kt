@@ -9,21 +9,29 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.unit.Dp
 import kotlinx.coroutines.flow.filter
 
-
 @Composable
-fun CxExposedDropdownMenu(
-    items: List<String>,
-    onItemSelected: (String,Int) -> Unit,
+fun <T>CxDropdown(
+    items: List<T>,
+    selectedText: (T) -> String,
+    onItemSelected: (item: T) -> Unit,
 ) {
     var selected by remember { mutableStateOf(items.first()) }
     var expanded by remember { mutableStateOf(false) }
@@ -34,7 +42,7 @@ fun CxExposedDropdownMenu(
         }
     }
     ExposedDropdownMenuStack(textField = {
-        OutlinedTextField(value = selected,
+        OutlinedTextField(value = selectedText(selected),
             onValueChange = {},
             interactionSource = interactionSource,
             readOnly = true,
@@ -53,16 +61,16 @@ fun CxExposedDropdownMenu(
                 .wrapContentSize(Alignment.TopStart)
         ) {
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                items.forEachIndexed { index,item ->
+                items.forEach { item ->
                     DropdownMenuItem(modifier = Modifier
                         .height(itemHeight)
                         .width(boxWidth),
                         onClick = {
                             expanded = false
                             selected = item
-                            onItemSelected(item,index)
+                            onItemSelected(item)
                         },
-                        text = { Text(item) })
+                        text = { Text(selectedText(item)) })
                 }
             }
         }

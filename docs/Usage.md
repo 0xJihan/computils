@@ -22,21 +22,50 @@
 
 ### text
 ```kotlin  linenums="1""
-    val context = LocalContext.current
-    var loading by remember { mutableStateOf(false) }
+@Composable
+fun StyledTextUsage() {
+    Column(modifier = Modifier.padding(16.dp)) {
 
-    CxButton(loading = loading) { //Do something }
+        // 1. Simple usage of StyledText
+        "Hello, Jetpack Compose!".text.make()
 
-    CxElevatedButton("Elevated Button") { loading=true}
+        // 2. Changing text size
+        "Large Text".text.size(24).make()
 
-    CxOutlinedButton("Outlined Button") { loading=false}
+        // 3. Changing text color
+        "Colored Text".text.color(Color.Red).make()
 
-    CxTextButton("Text Button", loading = loading,
-        onLoadingContent = {
-            "Loading...".text.make()
-        }) {
-        "Button Clicked".toast(context)
+        // 4. Making text bold
+        "Bold Text".text.bold().make()
+
+        // 5. Applying a modifier
+        "Padded Text".text.modifier(Modifier.padding(8.dp)).make()
+
+        // 6. Converting text to uppercase
+        "uppercase text".text.upperCase().make()
+
+        // 7. Converting text to lowercase
+        "LOWERCASE TEXT".text.lowerCase().make()
+
+        // 8. Converting text to title case
+        "title case text example".text.titleCase().make()
+
+        // 9. Setting text alignment
+        "Center Aligned Text".text.alignment(StyledText.TextAlignment.Center).make()
+
+        // 10. Limiting max lines
+        "This is a very long text that should be limited to one line".text.maxLines(1).make()
+
+        // 11. Limiting max words (truncating extra words)
+        "This text will be truncated after a few words".text.maxWords(5).make()
     }
+}
+
+// Example of using the toast function in an activity or Composable:
+fun showToast(context: Context) {
+    "Hello, Toast!".toast(context)
+}
+
 
 ```
 

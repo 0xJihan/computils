@@ -1,4 +1,5 @@
 site_name: Computils
+site_url: https://0xJihan.github.io/computils/
 
 theme:
   name: material

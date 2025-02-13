@@ -47,6 +47,7 @@ fun SimpleBottomNavDemo() {
             selectedTextStyle = TextStyle(
                 fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold
             ),
+            selectedScreen = 0,
             unselectedTextStyle = TextStyle(
                 fontFamily = FontFamily.SansSerif
             )
@@ -77,6 +78,7 @@ fun SimpleBottomNavWithLineDemo() {
             unselectedTextStyle = TextStyle(
                 fontFamily = FontFamily.SansSerif
             ),
+            selectedScreen = 0,
             shape = RoundedCornerShape(50.dp)
         )
     }
@@ -98,6 +100,7 @@ fun SimpleBottomNavWithDotDemo() {
             selectedColor = Color(0xFF73D3BB),
             unSelectedColor = Color(0XFFFFFFFF),
             iconSize = 28.dp,
+            selectedScreen = 0,
             dotBottomPadding = 3.dp,
             selectedTextStyle = TextStyle(
                 fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold

@@ -37,8 +37,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CxSimpleBottomNav(
-    modifier: Modifier = Modifier,
     screens: List<SimpleBottomNavItem>,
+    selectedScreen: Int,
+    modifier: Modifier = Modifier,
     height: Dp = 100.dp,
     elevation: Dp = 5.dp,
     shape: Shape = RectangleShape,
@@ -57,8 +58,9 @@ fun CxSimpleBottomNav(
     badgeColor: Color = Color(0xFFFF3849),
     badgeTextColor: Color = Color.White,
     verticalSpacing: Dp = 5.dp,
+    onSelected: (selectedIndex:Int) -> Unit = {}
 ) {
-    var selectedScreen by remember { mutableIntStateOf(0) }
+
 
     Box(
         modifier = modifier
@@ -94,7 +96,7 @@ fun CxSimpleBottomNav(
                         modifier = Modifier.clickable(
                                 interactionSource = interactionSource, indication = null
                             ) {
-                                selectedScreen = screens.indexOf(screen)
+                                onSelected(screens.indexOf(screen))
                             },
                         screen = screen,
                         selectedTextStyle = selectedTextStyle,

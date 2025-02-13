@@ -1,6 +1,7 @@
 package com.jihan.composeutils
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -53,6 +55,7 @@ fun CxContactList(
     charStyle: TextStyle,
     nameTextStyle: TextStyle,
     iconSize: Dp,
+    onClick: (contact: Contact) -> Unit
 ) {
     val context = LocalDensity.current
     var alphabetRelativeDragYOffset: Float? by remember { mutableStateOf(null) }
@@ -73,7 +76,9 @@ fun CxContactList(
                 charStyle = charStyle,
                 nameTextStyle = nameTextStyle,
                 iconSize = iconSize,
-            )
+            ){
+                onClick(it)
+            }
 
             val yOffset = alphabetRelativeDragYOffset
             if (yOffset != null) {
@@ -99,6 +104,7 @@ fun CxContactListWithScroller(
     nameTextStyle: TextStyle,
     iconSize: Dp,
     onAlphabetListDrag: (Float?, Float) -> Unit,
+    onClick: (contact: Contact) -> Unit
 ) {
     val mapOfFirstLetterIndex = remember(contacts) { contacts.getFirstUniqueSeenCharIndex() }
     val alphabetHeightInPixels = with(LocalDensity.current) { alphabetItemSize.toPx() }
@@ -119,7 +125,9 @@ fun CxContactListWithScroller(
             charStyle = charStyle,
             nameTextStyle = nameTextStyle,
             iconSize = iconSize,
-        )
+        ){
+            onClick(it)
+        }
 
         AlphabetScroller(
             onAlphabetListDrag = { relativeDragYOffset, containerDistanceFromTopOfScreen ->
@@ -147,6 +155,7 @@ fun CxContactList(
     charStyle: TextStyle,
     nameTextStyle: TextStyle,
     iconSize: Dp,
+    onClick: (contact: Contact) -> Unit
 ) {
     LazyColumn(
         modifier = modifier, state = lazyListState, verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -159,7 +168,9 @@ fun CxContactList(
                 charStyle = charStyle,
                 nameTextStyle = nameTextStyle,
                 iconSize = iconSize,
-            )
+            ){
+                onClick(it)
+            }
         }
     }
 }
@@ -240,8 +251,11 @@ fun CxContactItem(
     charStyle: TextStyle,
     nameTextStyle: TextStyle,
     iconSize: Dp,
+    onClick:(contact:Contact)->Unit
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier = Modifier.fillMaxWidth().clickable {
+        onClick(item)
+    }, verticalAlignment = Alignment.CenterVertically) {
         Box(
             modifier = Modifier.width(48.dp),
             contentAlignment = Alignment.Center,

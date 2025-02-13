@@ -150,9 +150,9 @@ fun String.filterChars(): String {
     return replace(Regex("[^\\w\\s]+"), "")
 }
 
-fun String.toDate(): Date? {
+fun String.toDate(format:String="dd-MM-yyyy"): Date? {
     return try {
-        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
+        SimpleDateFormat(format, Locale.getDefault()).parse(this)
     } catch (e: Exception) {
         null
     }

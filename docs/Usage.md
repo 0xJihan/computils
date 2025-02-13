@@ -463,6 +463,61 @@ fun CxBottomNavDemo() {
 
 }
 
+
+
+// ================================================================================
+
+ val screen = remember { listOf(
+
+     SimpleBottomNavItem(
+         icon = lucide.house, title = "Home"
+     ), SimpleBottomNavItem(
+         icon = lucide.search, title = "Search"
+     ), SimpleBottomNavItem(
+         icon = lucide.message_square, title = "Chat"
+     ), SimpleBottomNavItem(
+         icon = lucide.user_round, title = "Profile"
+     )
+ ) }
+ var selectedPosition by remember { mutableIntStateOf(0) }
+ Scaffold(
+     bottomBar = {
+
+         CxSimpleBottomNav(
+             modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
+             screens = screen,
+             selectedScreen = selectedPosition,
+             showDash = true,
+             height = 80.dp,
+             backgroundColor = Color(0xFF0B264F),
+             selectedColor = Color(0xFFFFBB4E),
+             unSelectedColor = Color(0XFFE3E3E3),
+             iconSize = 28.dp,
+             selectedTextStyle = TextStyle(
+                 fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold
+             ),
+             unselectedTextStyle = TextStyle(
+                 fontFamily = FontFamily.SansSerif
+             ),
+             shape = RoundedCornerShape(50.dp)
+         ){selectedIndex ->
+             selectedPosition = selectedIndex
+         }
+     }
+ ) {
+
+
+     Column(Modifier.fillMaxSize().padding(it)) {
+         when(selectedPosition){
+             0-> CenterBox { "Home Screen".text.make() }
+             1-> CenterBox { "Search Screen".text.make() }
+             2-> CenterBox { "Chat Screen".text.make() }
+             3-> CenterBox { "Profile Screen".text.make() }
+         }
+     }
+ }
+ 
+
 ```
 
 
@@ -666,29 +721,48 @@ fun CxMultiStepLoaderDemo() {
 
 
 
-### CxExposedDropdownMenu
+### CxDropDown
 ```kotlin  linenums="1""
- 
- @Composable
-fun ExposedDropdownDemo(modifier: Modifier = Modifier) {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        val list = remember { listOf("Item 1", "Item 2", "Item 3") }
-        var text by remember { mutableStateOf("") }
-
-        text.text.make()
-        Gap(30)
-        CxExposedDropdownMenu(list) { string, int ->
-            text = "$string\nIndex:$int"
-        }
 
 
+Column {
 
+
+    val list = listOf(
+        SimpleBottomNavItem("Home", lucide.house),
+        SimpleBottomNavItem("Search", lucide.search),
+        SimpleBottomNavItem("Profile", lucide.user_round),
+        SimpleBottomNavItem("Settings", lucide.settings)
+    )
+
+
+    val stringList = remember { listOf("Item 1", "Item 2", "Item 3") }
+
+
+    CxDropdown(items = list, selectedText = { it.title }) { item ->
+        println("Selected: $item at index:")
+
+    }
+
+    Gap(30)
+
+
+    CxSearchableDropdown(items = stringList, selectedText = { it }, dropdownItem = {
+        Text(it) // your custom dropdown item
+    }) { item ->
+        // your action
+    }
+    Gap(30)
+
+    CxSearchableDropdown(
+        items = list, selectedText = { it.title },
+        dropdownItem = {
+            Text(it.title) // your custom dropdown item
+        },
+
+
+        ) { item ->
+        // your action
     }
 }
 

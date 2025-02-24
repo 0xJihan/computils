@@ -10,8 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.jihan.composeutils.CenterBox
-import com.jihan.composeutils.CxDropdown
-import com.jihan.composeutils.CxSearchableDropdown
+import com.jihan.composeutils.*
 import com.jihan.composeutils.Gap
 import com.jihan.composeutils.SimpleBottomNavItem
 import com.jihan.computils.ui.theme.AppTheme
@@ -45,6 +44,7 @@ fun ComposeUtils() {
 
 
         val stringList = remember { listOf("Item 1", "Item 2", "Item 3") }
+
 
 
         CxDropdown(items = list, selectedText = { it.title }) { item ->

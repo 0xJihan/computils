@@ -19,7 +19,7 @@ fun SegmentedButtonDemo() {
         var cx1 by remember { mutableIntStateOf(0) }
         var cx2 by remember { mutableIntStateOf(0) }
          CxSegmentedButton(
-             buttonArray = listOf("Option 1", "Option 2", "Option 3"),
+             items = listOf("Option 1", "Option 2", "Option 3"),
              currentItem = cx1,
              title = "Segmented Button",
              onSegmentSelected = {
@@ -30,7 +30,7 @@ fun SegmentedButtonDemo() {
         Gap(20)
 
         CxSegmentedButton(
-            buttonArray = listOf("Option 1", "Option 2", "Option 3"),
+            items = listOf("Option 1", "Option 2", "Option 3"),
             currentItem = cx2,
             title = "Another Segmented Button",
             onSegmentSelected = {

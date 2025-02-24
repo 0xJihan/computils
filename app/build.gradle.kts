@@ -58,6 +58,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(project(":computils"))
+//    implementation("com.github.0xJihan:computils:1.0.1")
+
+
     implementation("com.github.0xJihan:lucide-icons:1.0.1")
 
 

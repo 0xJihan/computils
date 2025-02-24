@@ -226,3 +226,11 @@ class CxSnackBarState {
     }
 }
 
+
+@Composable
+fun rememberCxSnackBarState() : CxSnackBarState {
+    return remember {
+        CxSnackBarState()
+    }
+}
+

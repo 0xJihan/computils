@@ -11,14 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun CxSegmentedButton(
-    modifier: Modifier = Modifier,
-    buttonArray: List<String>,
+    items: List<String>,
     currentItem: Int,
     title: String = "",
+    titleTextStyle:TextStyle=MaterialTheme.typography.titleMedium,
+    modifier: Modifier = Modifier,
     color: SegmentedButtonColors = SegmentedButtonDefaults.colors(),
     shape: Shape = RectangleShape,
     onSegmentSelected: (Int) -> Unit
@@ -26,11 +28,11 @@ fun CxSegmentedButton(
 
     if (title.isNotEmpty()) Text(
         title,
-        style = MaterialTheme.typography.titleMedium,
+        style = titleTextStyle,
         modifier = Modifier.padding(vertical = 4.dp)
     )
     SingleChoiceSegmentedButtonRow(modifier = modifier) {
-        buttonArray.forEachIndexed { index, text ->
+        items.forEachIndexed { index, text ->
 
             SegmentedButton(
                 selected = index == currentItem,

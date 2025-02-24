@@ -1,20 +1,20 @@
-# Usage      
+# Usage
 
 
 ### Gap
 ```kotlin linenums="1""
 
-        Column { 
-                Text("Compose Utils")
-                Gap(30) // 30dp gap vertically
-                Text("Hi, there")
-            }
-            
-            Row { 
-                Text("Compose Utils")
-                Gap(30) // 30dp gap horizontally
-                Text("Hi, there")
-            }
+Column {
+    Text("Compose Utils")
+    Gap(30) // 30dp gap vertically
+    Text("Hi, there")
+}
+
+Row {
+    Text("Compose Utils")
+    Gap(30) // 30dp gap horizontally
+    Text("Hi, there")
+}
 
 ```
 
@@ -22,50 +22,21 @@
 
 ### text
 ```kotlin  linenums="1""
-@Composable
-fun StyledTextUsage() {
-    Column(modifier = Modifier.padding(16.dp)) {
+    val context = LocalContext.current
+    var loading by remember { mutableStateOf(false) }
 
-        // 1. Simple usage of StyledText
-        "Hello, Jetpack Compose!".text.make()
+    CxButton(loading = loading) { //Do something }
 
-        // 2. Changing text size
-        "Large Text".text.size(24).make()
+    CxElevatedButton("Elevated Button") { loading=true}
 
-        // 3. Changing text color
-        "Colored Text".text.color(Color.Red).make()
+    CxOutlinedButton("Outlined Button") { loading=false}
 
-        // 4. Making text bold
-        "Bold Text".text.bold().make()
-
-        // 5. Applying a modifier
-        "Padded Text".text.modifier(Modifier.padding(8.dp)).make()
-
-        // 6. Converting text to uppercase
-        "uppercase text".text.upperCase().make()
-
-        // 7. Converting text to lowercase
-        "LOWERCASE TEXT".text.lowerCase().make()
-
-        // 8. Converting text to title case
-        "title case text example".text.titleCase().make()
-
-        // 9. Setting text alignment
-        "Center Aligned Text".text.alignment(StyledText.TextAlignment.Center).make()
-
-        // 10. Limiting max lines
-        "This is a very long text that should be limited to one line".text.maxLines(1).make()
-
-        // 11. Limiting max words (truncating extra words)
-        "This text will be truncated after a few words".text.maxWords(5).make()
+    CxTextButton("Text Button", loading = loading,
+        onLoadingContent = {
+            "Loading...".text.make()
+        }) {
+        "Button Clicked".toast(context)
     }
-}
-
-// Example of using the toast function in an activity or Composable:
-fun showToast(context: Context) {
-    "Hello, Toast!".toast(context)
-}
-
 
 ```
 
@@ -138,9 +109,7 @@ Column {
 
 ### CxSnackBar
 ```kotlin  linenums="1""
-     val topSnackBarState = remember{
-        CxSnackBarState()
-    }
+     val topSnackBarState = rememberCxSnackBarState()
     val bottomSnackBarState = remember{
         CxSnackBarState()
     }
@@ -463,61 +432,6 @@ fun CxBottomNavDemo() {
 
 }
 
-
-
-// ================================================================================
-
- val screen = remember { listOf(
-
-     SimpleBottomNavItem(
-         icon = lucide.house, title = "Home"
-     ), SimpleBottomNavItem(
-         icon = lucide.search, title = "Search"
-     ), SimpleBottomNavItem(
-         icon = lucide.message_square, title = "Chat"
-     ), SimpleBottomNavItem(
-         icon = lucide.user_round, title = "Profile"
-     )
- ) }
- var selectedPosition by remember { mutableIntStateOf(0) }
- Scaffold(
-     bottomBar = {
-
-         CxSimpleBottomNav(
-             modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
-             screens = screen,
-             selectedScreen = selectedPosition,
-             showDash = true,
-             height = 80.dp,
-             backgroundColor = Color(0xFF0B264F),
-             selectedColor = Color(0xFFFFBB4E),
-             unSelectedColor = Color(0XFFE3E3E3),
-             iconSize = 28.dp,
-             selectedTextStyle = TextStyle(
-                 fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold
-             ),
-             unselectedTextStyle = TextStyle(
-                 fontFamily = FontFamily.SansSerif
-             ),
-             shape = RoundedCornerShape(50.dp)
-         ){selectedIndex ->
-             selectedPosition = selectedIndex
-         }
-     }
- ) {
-
-
-     Column(Modifier.fillMaxSize().padding(it)) {
-         when(selectedPosition){
-             0-> CenterBox { "Home Screen".text.make() }
-             1-> CenterBox { "Search Screen".text.make() }
-             2-> CenterBox { "Chat Screen".text.make() }
-             3-> CenterBox { "Profile Screen".text.make() }
-         }
-     }
- }
- 
-
 ```
 
 
@@ -721,48 +635,29 @@ fun CxMultiStepLoaderDemo() {
 
 
 
-### CxDropDown
+### CxExposedDropdownMenu
 ```kotlin  linenums="1""
+ 
+ @Composable
+fun ExposedDropdownDemo(modifier: Modifier = Modifier) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        val list = remember { listOf("Item 1", "Item 2", "Item 3") }
+        var text by remember { mutableStateOf("") }
+
+        text.text.make()
+        Gap(30)
+        CxExposedDropdownMenu(list) { string, int ->
+            text = "$string\nIndex:$int"
+        }
 
 
-Column {
 
-
-    val list = listOf(
-        SimpleBottomNavItem("Home", lucide.house),
-        SimpleBottomNavItem("Search", lucide.search),
-        SimpleBottomNavItem("Profile", lucide.user_round),
-        SimpleBottomNavItem("Settings", lucide.settings)
-    )
-
-
-    val stringList = remember { listOf("Item 1", "Item 2", "Item 3") }
-
-
-    CxDropdown(items = list, selectedText = { it.title }) { item ->
-        println("Selected: $item at index:")
-
-    }
-
-    Gap(30)
-
-
-    CxSearchableDropdown(items = stringList, selectedText = { it }, dropdownItem = {
-        Text(it) // your custom dropdown item
-    }) { item ->
-        // your action
-    }
-    Gap(30)
-
-    CxSearchableDropdown(
-        items = list, selectedText = { it.title },
-        dropdownItem = {
-            Text(it.title) // your custom dropdown item
-        },
-
-
-        ) { item ->
-        // your action
     }
 }
 
@@ -1289,13 +1184,90 @@ fun LifecycleExample() {
 ``` 
 
 
-### CxColorExtension
+
+### CxFilePicker
+```kotlin  linenums="1""
+
+@Composable
+fun CxFilePickerDemo(modifier: Modifier = Modifier) {
+
+
+    val selectedImage = remember { mutableStateOf<Uri?>(null) }
+
+    // Picking single image
+    val imagePicker = rememberCxFilePicker(PickerType.Single(FileType.Image)){uris ->
+        //? since we are picking single image, we can safely assume that the first uri in the list is the selected image
+        if (uris.isNotEmpty()){
+            selectedImage.value = uris[0]
+        }
+
+    }
+
+    // Picking multiple images
+    val videPicker = rememberCxFilePicker(PickerType.Multiple(FileType.Video)){uris: List<Uri> ->
+        //? handle multiple images here
+    }
+
+    // Collecting picked videos through flow
+    val pickedVideos = videPicker.pickedFilesFlow.collectAsStateWithLifecycle()
+
+
+    CxButton("Pick Image") {
+        imagePicker.pick()
+    }
+
+    val scope = rememberCoroutineScope()
+    CxButton("Pick Video") {
+      scope.launch {
+          val list = videPicker.pickAwait()
+          // using coroutine scope to call pickAwait() function
+      }
+    }
+
+
+
+}
+
+```
+
+
+
+### CxExpandableFab
 ```kotlin  linenums="1""
  
-  Cx.blue700
-  Cx.red50,
-  Cx.yellow100 
-  // etc.........
+@Composable
+fun CxExpandableFabDemo(modifier: Modifier = Modifier) {
+    
+    val itemList = remember { 
+        listOf(
+            CxFabItem(iconResId = lucide.shopping,"Shopping"){/*handle click*/},
+            CxFabItem(iconResId = lucide.ruler,"Ruler"){/*handle click*/},
+            CxFabItem(iconResId = lucide.check,"Check"){/*handle click*/},
+        )
+    }
+    
+   CxExpandableFab(
+       items = itemList,
+       icon = lucide.plus,
+   )
+    
+    
+}
+
+```
+
+
+
+
+
+
+### CxColorExtension
+```kotlin  linenums="1""
+
+Cx.blue700
+Cx.red50,
+Cx.yellow100
+// etc.........
 
 ```
 

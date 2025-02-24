@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,6 +53,28 @@ fun CenterBox(
 fun ColumnScope.Gap(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
 
+}
+
+
+@Composable
+fun LazyItemScope.Gap(height:Int): Unit {
+    Spacer(Modifier.height(height.dp))
+}
+
+@Composable
+fun LazyListScope.Gap(height: Int): Unit {
+    Spacer(Modifier.height(height.dp))
+}
+
+
+
+@Composable
+fun Tas(modifier: Modifier = Modifier) {
+    LazyRow {
+        items(1000){
+
+        }
+    }
 }
 
 @Composable
@@ -129,3 +158,7 @@ fun Modifier.noRippleEffect(
     )
 }
 
+@Composable
+fun Int.painter(): Painter {
+    return painterResource(this)
+}

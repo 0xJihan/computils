@@ -44,6 +44,7 @@ fun CxEditText(
     imeAction: ImeAction = ImeAction.Next,
     colors :TextFieldColors = TextFieldDefaults.colors(),
     shape: Shape = RectangleShape,
+    maxLines:Int=1,
     onValueChange: (String) -> Unit,
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
@@ -52,9 +53,9 @@ fun CxEditText(
         value = value,
         onValueChange = onValueChange,
         label = { Text(text = label, ) },
-        singleLine = true,
         colors = colors,
         shape = shape,
+        maxLines = maxLines,
         leadingIcon = leadingIcon?.let {
             {
                 Icon(

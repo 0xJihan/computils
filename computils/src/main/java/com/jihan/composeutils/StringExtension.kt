@@ -1,6 +1,11 @@
 package com.jihan.composeutils
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Build
+import android.util.Patterns
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -31,9 +36,7 @@ val String.isEmpty: Boolean
     get() = trimStart().isEmpty()
 
 fun String.validateEmail(): Boolean {
-    return Pattern.compile(
-        "^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\\.[a-zA-Z]+"
-    ).matcher(this).matches()
+    return Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 fun String.isRtlLanguage(): Boolean {
@@ -194,4 +197,11 @@ fun String.formatDigitPattern(digit: Int = 4, pattern: String = " "): String {
 
 fun String.formatDigitPatternEnd(digit: Int = 4, pattern: String = " "): String {
     return reversed().formatDigitPattern(digit, pattern).reversed()
+}
+
+fun String.copyToClipboard(context: Context, text: String) {
+    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("Copied Text", text)
+    clipboard.setPrimaryClip(clip)
+    "Copied to clipboard".toast(context)
 }

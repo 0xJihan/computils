@@ -18,8 +18,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.CxOtpView
-import com.jihan.composeutils.toast
+import com.jihan.composeutils.ui.CxOtpView
+import com.jihan.composeutils.core.toast
 
 @Composable
 fun OtpViewDemo() {

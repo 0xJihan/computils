@@ -4,10 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.coloredShadow
-import com.jihan.composeutils.Gap
-import com.jihan.composeutils.text
+import com.jihan.composeutils.core.coloredShadow
+import com.jihan.composeutils.core.Gap
+import com.jihan.composeutils.core.text
 
 @Composable
 fun ColoredShadowDemo() {

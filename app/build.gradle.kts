@@ -59,6 +59,7 @@ dependencies {
 
     implementation(project(":computils"))
 //    implementation("com.github.0xJihan:computils:1.0.1")
+//    implementation("com.github.GrenderG:Toasty:1.5.2")
 
 
     implementation("com.github.0xJihan:lucide-icons:1.0.1")

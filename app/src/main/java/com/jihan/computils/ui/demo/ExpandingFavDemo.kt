@@ -17,9 +17,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.CxExpandingFav
-import com.jihan.composeutils.CxFABItem
-import com.jihan.composeutils.FABState
+import com.jihan.composeutils.ui.CxExpandingFav
+import com.jihan.composeutils.ui.CxFABItem
+import com.jihan.composeutils.ui.FABState
 import com.jihan.lucide_icons.lucide
 
 @Composable

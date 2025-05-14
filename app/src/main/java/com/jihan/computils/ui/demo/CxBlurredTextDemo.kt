@@ -7,9 +7,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.Cx
-import com.jihan.composeutils.CxBlurredText
-import com.jihan.composeutils.Gap
+import com.jihan.composeutils.core.Cx
+import com.jihan.composeutils.ui.CxBlurredText
+import com.jihan.composeutils.core.Gap
 
 @Composable
 fun CxBlurredTextDemo() {

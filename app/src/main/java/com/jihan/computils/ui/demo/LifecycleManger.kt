@@ -1,7 +1,7 @@
 package com.jihan.computils.ui.demo
 
 import androidx.compose.runtime.Composable
-import com.jihan.composeutils.CxLifecycleManager
+import com.jihan.composeutils.core.CxLifecycleManager
 
 @Composable
 fun LifecycleExample() {

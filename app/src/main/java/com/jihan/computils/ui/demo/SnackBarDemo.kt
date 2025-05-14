@@ -22,9 +22,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.CxSnackBar
-import com.jihan.composeutils.CxSnackBarPosition
-import com.jihan.composeutils.CxSnackBarState
+import com.jihan.composeutils.ui.CxSnackBar
+import com.jihan.composeutils.ui.CxSnackBarPosition
+import com.jihan.composeutils.ui.CxSnackBarState
+import com.jihan.lucide_icons.R
 import com.jihan.lucide_icons.lucide
 
 @Composable
@@ -86,7 +87,7 @@ fun CustomSnackBarDemo() {
             position = CxSnackBarPosition.Top,
             verticalPadding = 16.dp,
             horizontalPadding = 12.dp,
-            iconRes = com.jihan.lucide_icons.R.drawable.check_check, // Replace with your image
+            iconRes = R.drawable.check_check, // Replace with your image
             enterAnimation = expandVertically(
                 animationSpec = tween(delayMillis = 300),
                 expandFrom = Alignment.Top

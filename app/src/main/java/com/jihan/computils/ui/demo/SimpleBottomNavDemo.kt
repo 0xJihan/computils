@@ -12,8 +12,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.CxSimpleBottomNav
-import com.jihan.composeutils.SimpleBottomNavItem
+import com.jihan.composeutils.ui.CxSimpleBottomNav
+import com.jihan.composeutils.ui.SimpleBottomNavItem
 import com.jihan.lucide_icons.lucide
 
 /*** Preview Code  Starts here. ***/

@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.jihan.composeutils.CxEditText
-import com.jihan.composeutils.Gap
+import com.jihan.composeutils.ui.CxEditText
+import com.jihan.composeutils.core.Gap
 import com.jihan.lucide_icons.lucide
 
 @Composable

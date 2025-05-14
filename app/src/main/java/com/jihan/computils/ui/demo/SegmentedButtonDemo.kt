@@ -7,9 +7,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.jihan.composeutils.Cx
-import com.jihan.composeutils.CxSegmentedButton
-import com.jihan.composeutils.Gap
+import com.jihan.composeutils.core.Cx
+import com.jihan.composeutils.ui.CxSegmentedButton
+import com.jihan.composeutils.core.Gap
 
 @Composable
 fun SegmentedButtonDemo() {

@@ -3,9 +3,9 @@ package com.jihan.computils.ui.demo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.jihan.composeutils.CxIconCheckBox
-import com.jihan.composeutils.CxIconCheckBoxGrouped
-import com.jihan.composeutils.CxIconCheckBoxWithLabel
+import com.jihan.composeutils.ui.CxIconCheckBox
+import com.jihan.composeutils.ui.CxIconCheckBoxGrouped
+import com.jihan.composeutils.ui.CxIconCheckBoxWithLabel
 import com.jihan.lucide_icons.lucide
 
 /*** Simple Checkbox ***/

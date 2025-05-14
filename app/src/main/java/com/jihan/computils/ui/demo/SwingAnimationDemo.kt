@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.CxSwingAnimation
+import com.jihan.composeutils.ui.CxSwingAnimation
 
 @Composable
 fun SwingAnimationDemo() {

@@ -10,7 +10,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.CxRangeSliderWithPin
+import com.jihan.composeutils.ui.CxRangeSliderWithPin
 
 @Composable
 fun RangeSliderWithPinDemo() {

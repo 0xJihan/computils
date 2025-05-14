@@ -7,10 +7,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.jihan.composeutils.CxButton
-import com.jihan.composeutils.FileType
-import com.jihan.composeutils.PickerType
-import com.jihan.composeutils.rememberCxFilePicker
+import com.jihan.composeutils.ui.CxButton
+import com.jihan.composeutils.core.FileType
+import com.jihan.composeutils.core.PickerType
+import com.jihan.composeutils.core.rememberCxFilePicker
 import kotlinx.coroutines.launch
 
 @Composable

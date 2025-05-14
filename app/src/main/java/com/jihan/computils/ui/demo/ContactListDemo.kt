@@ -9,9 +9,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.Contact
-import com.jihan.composeutils.CxContactList
-import com.jihan.composeutils.toast
+import com.jihan.composeutils.ui.Contact
+import com.jihan.composeutils.ui.CxContactList
+import com.jihan.composeutils.core.toast
 import com.jihan.lucide_icons.lucide
 
 @Composable

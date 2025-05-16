@@ -27,10 +27,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.jihan.composeutils.core.ImageSource
+import com.jihan.composeutils.core.painter
 
 @Composable
 fun CxSimpleBottomNav(
@@ -55,7 +56,7 @@ fun CxSimpleBottomNav(
     badgeColor: Color = Color(0xFFFF3849),
     badgeTextColor: Color = Color.White,
     verticalSpacing: Dp = 5.dp,
-    onSelected: (selectedIndex:Int) -> Unit = {}
+    onSelected: (selectedIndex: Int) -> Unit = {}
 ) {
 
 
@@ -91,10 +92,10 @@ fun CxSimpleBottomNav(
 
                     BottomNavItem(
                         modifier = Modifier.clickable(
-                                interactionSource = interactionSource, indication = null
-                            ) {
-                                onSelected(screens.indexOf(screen))
-                            },
+                            interactionSource = interactionSource, indication = null
+                        ) {
+                            onSelected(screens.indexOf(screen))
+                        },
                         screen = screen,
                         selectedTextStyle = selectedTextStyle,
                         unselectedTextStyle = unselectedTextStyle,
@@ -156,15 +157,33 @@ private fun BottomNavItem(
                 verticalArrangement = Arrangement.spacedBy(verticalSpacing),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Icon(
-                    painter = painterResource(
-                        id = screen.icon,
-                    ), modifier = Modifier.size(iconSize), tint = if (isSelected) {
-                        selectedColor
-                    } else {
-                        unSelectedColor
-                    }, contentDescription = screen.title
-                )
+                when (screen.icon) {
+                    is ImageSource.Res -> {
+                        Icon(
+                            screen.icon.resId.painter(),
+                            modifier = Modifier.size(iconSize),
+                            tint = if (isSelected) {
+                                selectedColor
+                            } else {
+                                unSelectedColor
+                            },
+                            contentDescription = screen.title
+                        )
+                    }
+
+                    is ImageSource.Vector -> {
+                        Icon(
+                            screen.icon.vector,
+                            modifier = Modifier.size(iconSize),
+                            tint = if (isSelected) {
+                                selectedColor
+                            } else {
+                                unSelectedColor
+                            },
+                            contentDescription = screen.title
+                        )
+                    }
+                }
 
                 Text(
                     text = screen.title, color = if (isSelected) {
@@ -183,6 +202,6 @@ private fun BottomNavItem(
 }
 
 data class SimpleBottomNavItem(
-    val title: String, val icon: Int, val badgeCount: Int? = null
+    val title: String, val icon: ImageSource, val badgeCount: Int? = null
 )
 

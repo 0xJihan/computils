@@ -2,6 +2,7 @@ package com.jihan.composeutils.core
 
 import androidx.compose.ui.graphics.Color
 
+@Suppress("unused")
 object Cx {
     // Grays
     val gray50 = Color(0xFFF3F4F6)

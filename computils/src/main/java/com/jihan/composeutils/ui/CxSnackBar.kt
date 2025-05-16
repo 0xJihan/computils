@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,29 +33,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathFillType.Companion.EvenOdd
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.StrokeCap.Companion.Butt
+import androidx.compose.ui.graphics.StrokeJoin.Companion.Miter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector.Builder
+import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jihan.composeutils.R
 import com.jihan.composeutils.core.Cx
+import com.jihan.composeutils.core.ImageSource
+import com.jihan.composeutils.core.painter
 import java.util.Timer
 import kotlin.concurrent.schedule
-
-import androidx.compose.ui.graphics.PathFillType.Companion.EvenOdd
-import androidx.compose.ui.graphics.StrokeCap.Companion.Butt
-import androidx.compose.ui.graphics.StrokeJoin.Companion.Miter
-import androidx.compose.ui.graphics.vector.ImageVector.Builder
-import androidx.compose.ui.graphics.vector.path
-import androidx.compose.ui.unit.dp
-
-
 
 
 @Composable
@@ -65,14 +58,14 @@ fun CxSnackBar(
     state: CxSnackBarState,
     position: CxSnackBarPosition = CxSnackBarPosition.Bottom,
     duration: Long = 3000L,
-    iconRes: Int = R.drawable.info, // Replace with your image
+    iconRes: ImageSource = ImageSource.Vector(SnackbarIcon.IcWarning), // Replace with your image
     iconSize: Dp = 24.dp,
     backgroundColor: Color = Color.Gray,
     iconColor: Color = Color.White,
     textStyle: TextStyle = TextStyle.Default,
     enterAnimation: EnterTransition = expandVertically(
         animationSpec = tween(delayMillis = 300),
-        expandFrom = when(position) {
+        expandFrom = when (position) {
             is CxSnackBarPosition.Top -> Alignment.Top
             is CxSnackBarPosition.Bottom -> Alignment.Bottom
             is CxSnackBarPosition.Float -> Alignment.CenterVertically
@@ -80,7 +73,7 @@ fun CxSnackBar(
     ),
     exitAnimation: ExitTransition = shrinkVertically(
         animationSpec = tween(delayMillis = 300),
-        shrinkTowards =  when(position) {
+        shrinkTowards = when (position) {
             is CxSnackBarPosition.Top -> Alignment.Top
             is CxSnackBarPosition.Bottom -> Alignment.Bottom
             is CxSnackBarPosition.Float -> Alignment.CenterVertically
@@ -120,7 +113,7 @@ fun CxSnackBar(
                         is CxSnackBarPosition.Float -> 24.dp
                     }
                 ),
-            verticalArrangement = when(position) {
+            verticalArrangement = when (position) {
                 is CxSnackBarPosition.Top -> Arrangement.Top
                 is CxSnackBarPosition.Bottom -> Arrangement.Bottom
                 is CxSnackBarPosition.Float -> Arrangement.Bottom
@@ -129,12 +122,12 @@ fun CxSnackBar(
         ) {
             AnimatedVisibility(
                 visible = state.isNotEmpty() && showSnackBar,
-                enter = when(position) {
+                enter = when (position) {
                     is CxSnackBarPosition.Top -> enterAnimation
                     is CxSnackBarPosition.Bottom -> enterAnimation
                     is CxSnackBarPosition.Float -> fadeIn()
                 },
-                exit = when(position) {
+                exit = when (position) {
                     is CxSnackBarPosition.Top -> exitAnimation
                     is CxSnackBarPosition.Bottom -> exitAnimation
                     is CxSnackBarPosition.Float -> fadeOut()
@@ -166,7 +159,7 @@ private fun SnackBarItem(
     textStyle: TextStyle,
     verticalPadding: Dp,
     horizontalPadding: Dp,
-    iconRes: Int
+    iconRes: ImageSource
 ) {
     Row(
         modifier = Modifier
@@ -196,13 +189,28 @@ private fun SnackBarItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Icon(
-                modifier = Modifier
-                    .size(iconSize),
-                painter = painterResource(id = iconRes),
-                contentDescription = "SnackBar Icon",
-                tint = iconColor
-            )
+            when (iconRes) {
+                is ImageSource.Res -> {
+                    Icon(
+                        iconRes.resId.painter(),
+                        modifier = Modifier
+                            .size(iconSize),
+                        contentDescription = "SnackBar Icon",
+                        tint = iconColor
+                    )
+                }
+
+                is ImageSource.Vector -> {
+                    Icon(
+                        iconRes.vector,
+                        modifier = Modifier
+                            .size(iconSize),
+                        contentDescription = "SnackBar Icon",
+                        tint = iconColor
+                    )
+                }
+            }
+
 
             Text(
                 modifier = Modifier,
@@ -215,11 +223,11 @@ private fun SnackBarItem(
 
 sealed class CxSnackBarPosition {
 
-    data object Top: CxSnackBarPosition()
+    data object Top : CxSnackBarPosition()
 
-    data object Bottom: CxSnackBarPosition()
+    data object Bottom : CxSnackBarPosition()
 
-    data object Float: CxSnackBarPosition()
+    data object Float : CxSnackBarPosition()
 }
 
 class CxSnackBarState {
@@ -227,7 +235,7 @@ class CxSnackBarState {
     private val _message = mutableStateOf<String?>(null)
     val message: State<String?> = _message
 
-    var updateState by  mutableStateOf(false)
+    var updateState by mutableStateOf(false)
         private set
 
     fun addMessage(message: String) {
@@ -245,7 +253,7 @@ object CxSnackBar {
     @Composable
     fun Success(
         state: CxSnackBarState,
-        position: CxSnackBarPosition= CxSnackBarPosition.Top
+        position: CxSnackBarPosition = CxSnackBarPosition.Top
     ) {
         CxSnackBar(
             state = state,
@@ -256,7 +264,9 @@ object CxSnackBar {
             iconSize = 28.dp,
             verticalPadding = 16.dp,
             horizontalPadding = 12.dp,
-            iconRes = R.drawable.check, // Replace with your image
+            iconRes = ImageSource.Vector(
+                SnackbarIcon.IcSuccess
+            ),
             enterAnimation = expandVertically(
                 animationSpec = tween(delayMillis = 300),
                 expandFrom = Alignment.Bottom
@@ -276,7 +286,7 @@ object CxSnackBar {
     @Composable
     fun Error(
         state: CxSnackBarState,
-        position: CxSnackBarPosition= CxSnackBarPosition.Top
+        position: CxSnackBarPosition = CxSnackBarPosition.Top
     ) {
         CxSnackBar(
             state = state,
@@ -287,7 +297,9 @@ object CxSnackBar {
             iconSize = 28.dp,
             verticalPadding = 16.dp,
             horizontalPadding = 12.dp,
-            iconRes = R.drawable.x, // Replace with your image
+            iconRes = ImageSource.Vector(
+                SnackbarIcon.IcError
+            ),
             enterAnimation = expandVertically(
                 animationSpec = tween(delayMillis = 300),
                 expandFrom = Alignment.Bottom
@@ -307,7 +319,7 @@ object CxSnackBar {
     @Composable
     fun Warning(
         state: CxSnackBarState,
-        position: CxSnackBarPosition= CxSnackBarPosition.Top
+        position: CxSnackBarPosition = CxSnackBarPosition.Top
     ) {
         CxSnackBar(
             state = state,
@@ -318,7 +330,9 @@ object CxSnackBar {
             iconSize = 28.dp,
             verticalPadding = 16.dp,
             horizontalPadding = 12.dp,
-            iconRes = R.drawable.info, // Replace with your image
+            iconRes = ImageSource.Vector(
+                SnackbarIcon.IcWarning
+            ),
             enterAnimation = expandVertically(
                 animationSpec = tween(delayMillis = 300),
                 expandFrom = Alignment.Bottom
@@ -337,7 +351,7 @@ object CxSnackBar {
 }
 
 @Composable
-fun rememberCxSnackBarState() : CxSnackBarState {
+fun rememberCxSnackBarState(): CxSnackBarState {
     return remember {
         CxSnackBarState()
     }
@@ -348,7 +362,7 @@ object SnackbarIcon
 
 // ICON
 
-public val SnackbarIcon.IcSuccess: ImageVector
+val SnackbarIcon.IcSuccess: ImageVector
     get() {
         if (_icSuccess != null) {
             return _icSuccess!!
@@ -392,8 +406,7 @@ public val SnackbarIcon.IcSuccess: ImageVector
 private var _icSuccess: ImageVector? = null
 
 
-
-public val SnackbarIcon.IcWarning: ImageVector
+val SnackbarIcon.IcWarning: ImageVector
     get() {
         if (_icWarning != null) {
             return _icWarning!!
@@ -445,7 +458,7 @@ public val SnackbarIcon.IcWarning: ImageVector
 private var _icWarning: ImageVector? = null
 
 
-public val SnackbarIcon.IcError: ImageVector
+val SnackbarIcon.IcError: ImageVector
     get() {
         if (_icError != null) {
             return _icError!!

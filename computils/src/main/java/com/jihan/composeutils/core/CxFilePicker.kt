@@ -53,8 +53,8 @@ sealed class FileType(val mimeType: String) {
 
 
 sealed class PickerType {
-    data class Single(val fileType: FileType = FileType.Any) : PickerType()
-    data class Multiple(val fileType: FileType = FileType.Any) : PickerType()
+    data class Single(val fileType: FileType = FileType.Image) : PickerType()
+    data class Multiple(val fileType: FileType = FileType.Image) : PickerType()
 }
 
 class CxFilePicker(

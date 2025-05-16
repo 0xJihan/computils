@@ -9,6 +9,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumnScope
+import androidx.compose.foundation.layout.FlowRowScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -66,15 +69,19 @@ fun LazyListScope.Gap(height: Int) {
     Spacer(Modifier.height(height.dp))
 }
 
-
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Tas(modifier: Modifier = Modifier) {
-    LazyRow {
-        items(1000) {
-
-        }
-    }
+fun FlowRowScope.Gap(size: Int) {
+    Spacer(Modifier.width(size.dp))
 }
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun FlowColumnScope.Gap(size: Int) {
+Spacer(Modifier.height(size.dp))
+}
+
+
 
 @Composable
 fun RowScope.Gap(size: Int) {

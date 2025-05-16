@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,12 +32,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jihan.composeutils.R
+import com.jihan.composeutils.core.ImageSource
 
 @Composable
 fun CxEditText(
     value: String,
     label: String="",
-    leadingIcon: Int? = null,
+    leadingIcon: ImageVector? = null,
     padding: Dp = 4.dp,
     modifier: Modifier = Modifier
         .fillMaxWidth()
@@ -60,9 +62,11 @@ fun CxEditText(
         maxLines = maxLines,
         singleLine = maxLines == 1,
         leadingIcon = leadingIcon?.let {
+
             {
+
                 Icon(
-                    painter = painterResource(id = it),
+                   it,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
@@ -114,7 +118,7 @@ fun CxEditText(
 fun CxOutlinedEditText(
     value: String,
     label: String="",
-    leadingIcon: Int? = null,
+    leadingIcon: ImageVector? = null,
     padding: Dp = 4.dp,
     modifier: Modifier = Modifier
         .fillMaxWidth()
@@ -140,7 +144,7 @@ fun CxOutlinedEditText(
         leadingIcon = leadingIcon?.let {
             {
                 Icon(
-                    painter = painterResource(id = it),
+                    it,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )

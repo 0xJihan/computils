@@ -1,6 +1,9 @@
 package com.jihan.composeutils.ui
 
+
 import android.util.Base64
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
@@ -9,85 +12,92 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
-class CxEncryption(
-    private val secretKey: String,
-    private val salt: ByteArray = generateRandomBytes(16),
-    private val iterationCount: Int = 65536,
-    private val keyLength: Int = 256
-) {
+class CxAesEncryption {
     companion object {
         private const val ALGORITHM = "AES"
         private const val TRANSFORMATION = "AES/GCM/NoPadding"
         private const val TAG_LENGTH = 128
+        private const val SALT_LENGTH = 16
+        private const val IV_LENGTH = 12
+        private const val ITERATION_COUNT = 65536
+        private const val KEY_LENGTH = 256
+        private const val DELIMITER = "$"
+        private const val VERSION = "1"
 
-        fun generateRandomBytes(length: Int): ByteArray {
+        private fun generateRandomBytes(length: Int): ByteArray {
             return ByteArray(length).apply {
                 SecureRandom().nextBytes(this)
             }
         }
-    }
 
-    data class EncryptedData(
-        val ciphertext: ByteArray,
-        val iv: ByteArray,
-        val salt: ByteArray,
-        val encryptedString: String
-    ) {
-        fun toBase64(): String {
-            // Format: salt:iv:ciphertext
-            val combined = salt + iv + ciphertext
-            return Base64.encodeToString(combined, Base64.DEFAULT)
+
+        fun encryptBlocking(password: String): String {
+            val salt = generateRandomBytes(SALT_LENGTH)
+            val iv = generateRandomBytes(IV_LENGTH)
+            val key = generateKey(password, salt)
+
+
+            val cipher = Cipher.getInstance(TRANSFORMATION)
+            val gcmSpec = GCMParameterSpec(TAG_LENGTH, iv)
+            cipher.init(Cipher.ENCRYPT_MODE, key, gcmSpec)
+            val ciphertext = cipher.doFinal(password.toByteArray(Charsets.UTF_8))
+
+
+
+            val saltBase64 = Base64.encodeToString(salt, Base64.NO_WRAP)
+            val ivBase64 = Base64.encodeToString(iv, Base64.NO_WRAP)
+            val ciphertextBase64 = Base64.encodeToString(ciphertext, Base64.NO_WRAP)
+
+            return "$VERSION$DELIMITER$saltBase64$DELIMITER$ivBase64$DELIMITER$ciphertextBase64"
         }
 
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
 
-            other as EncryptedData
-            return ciphertext.contentEquals(other.ciphertext) && iv.contentEquals(other.iv) && salt.contentEquals(
-                other.salt
-            )
+        suspend fun encrypt(password: String): String = withContext(Dispatchers.IO) {
+            encryptBlocking(password)
         }
 
-        override fun hashCode(): Int {
-            var result = ciphertext.contentHashCode()
-            result = 31 * result + iv.contentHashCode()
-            result = 31 * result + salt.contentHashCode()
-            return result
+
+        fun verifyBlocking(password: String, hashedPassword: String): Boolean {
+            try {
+
+                val parts = hashedPassword.split(DELIMITER)
+                if (parts.size != 4 || parts[0] != VERSION) {
+                    return false
+                }
+
+                val salt = Base64.decode(parts[1], Base64.NO_WRAP)
+                val iv = Base64.decode(parts[2], Base64.NO_WRAP)
+                val ciphertext = Base64.decode(parts[3], Base64.NO_WRAP)
+
+
+                val key = generateKey(password, salt)
+
+
+                val cipher = Cipher.getInstance(TRANSFORMATION)
+                val gcmSpec = GCMParameterSpec(TAG_LENGTH, iv)
+                cipher.init(Cipher.DECRYPT_MODE, key, gcmSpec)
+
+                val decrypted = cipher.doFinal(ciphertext)
+                val decryptedPassword = String(decrypted, Charsets.UTF_8)
+
+
+                return password == decryptedPassword
+            } catch (_: Exception) {
+
+                return false
+            }
+        }
+
+
+        suspend fun verify(password: String, hashedPassword: String): Boolean = withContext(Dispatchers.IO) {
+            verifyBlocking(password, hashedPassword)
+        }
+
+        private fun generateKey(password: String, salt: ByteArray): SecretKey {
+            val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+            val spec = PBEKeySpec(password.toCharArray(), salt, ITERATION_COUNT, KEY_LENGTH)
+            val tmp = factory.generateSecret(spec)
+            return SecretKeySpec(tmp.encoded, ALGORITHM)
         }
     }
-
-    private fun generateKey(salt: ByteArray): SecretKey {
-        val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
-        val spec = PBEKeySpec(secretKey.toCharArray(), salt, iterationCount, keyLength)
-        val tmp = factory.generateSecret(spec)
-        return SecretKeySpec(tmp.encoded, ALGORITHM)
-    }
-
-    fun encrypt(input: String): EncryptedData {
-        // Generate a random IV for each encryption
-        val iv = generateRandomBytes(12) // 12 bytes IV for GCM
-
-        val cipher = Cipher.getInstance(TRANSFORMATION)
-        val secretKey = generateKey(salt)
-        val gcmSpec = GCMParameterSpec(TAG_LENGTH, iv)
-
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, gcmSpec)
-        val encrypted = cipher.doFinal(input.toByteArray(Charsets.UTF_8))
-
-        val encryptedString = Base64.encodeToString(encrypted, Base64.DEFAULT)
-
-        return EncryptedData(encrypted, iv, salt, encryptedString)
-    }
-
-    fun decrypt(encryptedData: EncryptedData): String {
-        val cipher = Cipher.getInstance(TRANSFORMATION)
-        val secretKey = generateKey(encryptedData.salt)
-        val gcmSpec = GCMParameterSpec(TAG_LENGTH, encryptedData.iv)
-
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, gcmSpec)
-        val decrypted = cipher.doFinal(encryptedData.ciphertext)
-        return String(decrypted, Charsets.UTF_8)
-    }
-
 }

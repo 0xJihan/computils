@@ -1,6 +1,6 @@
 package com.jihan.composeutils.ui
 
-import android.R
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -20,6 +20,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +41,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.jihan.composeutils.R
+import com.jihan.composeutils.core.Cx
 import java.util.Timer
 import kotlin.concurrent.schedule
 
@@ -50,7 +55,7 @@ fun CxSnackBar(
     state: CxSnackBarState,
     position: CxSnackBarPosition = CxSnackBarPosition.Bottom,
     duration: Long = 3000L,
-    iconRes: Int = R.drawable.ic_menu_help, // Replace with your image
+    iconRes: Int = R.drawable.info, // Replace with your image
     iconSize: Dp = 24.dp,
     backgroundColor: Color = Color.Gray,
     iconColor: Color = Color.White,
@@ -227,6 +232,101 @@ class CxSnackBarState {
     }
 }
 
+
+object CxSnackBar {
+    @Composable
+    fun Success(
+        state: CxSnackBarState,
+        position: CxSnackBarPosition= CxSnackBarPosition.Top
+    ) {
+        CxSnackBar(
+            state = state,
+            duration = 3000L,
+            position = position,
+            backgroundColor = Cx.green600,
+            iconColor = Color(0xFFEEEEEE),
+            iconSize = 28.dp,
+            verticalPadding = 16.dp,
+            horizontalPadding = 12.dp,
+            iconRes = R.drawable.check, // Replace with your image
+            enterAnimation = expandVertically(
+                animationSpec = tween(delayMillis = 300),
+                expandFrom = Alignment.Bottom
+            ),
+            exitAnimation = shrinkVertically(
+                animationSpec = tween(delayMillis = 300),
+                shrinkTowards = Alignment.Bottom
+            ),
+            textStyle = TextStyle.Default.copy(
+                color = Color.White,
+                fontSize = 16.sp
+            )
+        )
+    }
+
+
+    @Composable
+    fun Error(
+        state: CxSnackBarState,
+        position: CxSnackBarPosition= CxSnackBarPosition.Top
+    ) {
+        CxSnackBar(
+            state = state,
+            duration = 3000L,
+            position = position,
+            backgroundColor = Cx.red600,
+            iconColor = Color.White,
+            iconSize = 28.dp,
+            verticalPadding = 16.dp,
+            horizontalPadding = 12.dp,
+            iconRes = R.drawable.x, // Replace with your image
+            enterAnimation = expandVertically(
+                animationSpec = tween(delayMillis = 300),
+                expandFrom = Alignment.Bottom
+            ),
+            exitAnimation = shrinkVertically(
+                animationSpec = tween(delayMillis = 300),
+                shrinkTowards = Alignment.Bottom
+            ),
+            textStyle = TextStyle.Default.copy(
+                color = Color.White,
+                fontSize = 16.sp
+            )
+        )
+    }
+
+
+    @Composable
+    fun Warning(
+        state: CxSnackBarState,
+        position: CxSnackBarPosition= CxSnackBarPosition.Top
+    ) {
+        CxSnackBar(
+            state = state,
+            duration = 3000L,
+            position = position,
+            backgroundColor = Cx.yellow500,
+            iconColor = Color.White,
+            iconSize = 28.dp,
+            verticalPadding = 16.dp,
+            horizontalPadding = 12.dp,
+            iconRes = R.drawable.info, // Replace with your image
+            enterAnimation = expandVertically(
+                animationSpec = tween(delayMillis = 300),
+                expandFrom = Alignment.Bottom
+            ),
+            exitAnimation = shrinkVertically(
+                animationSpec = tween(delayMillis = 300),
+                shrinkTowards = Alignment.Bottom
+            ),
+            textStyle = TextStyle.Default.copy(
+                color = Color.White,
+                fontSize = 16.sp
+            )
+        )
+    }
+
+}
 
 @Composable
 fun rememberCxSnackBarState() : CxSnackBarState {

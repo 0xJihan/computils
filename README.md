@@ -35,10 +35,9 @@ repositories {
 Include the Computils dependency in your **module-level** `build.gradle` file:
 
 ```gradle
-implementation("com.github.0xJihan:computils:$latestVersion")
+implementation("com.github.0xJihan:computils:v1.0.4")
 ```
 
-Replace `$latestVersion` with the latest release from [JitPack](https://jitpack.io/#0xJihan/computils).
 
 ---
 
